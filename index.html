@@ -33,17 +33,19 @@
           "Segoe UI",
           Roboto,
           sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #f1f5f9;
         min-height: 100vh;
-        padding: 16px;
+        padding: 24px;
       }
 
       .container {
         max-width: 1400px;
         margin: 0 auto;
         background: #ffffff;
-        border-radius: 28px;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        border-radius: 20px;
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
         overflow: hidden;
         padding: 24px;
       }
@@ -53,30 +55,33 @@
         text-align: center;
         margin-bottom: 24px;
         padding-bottom: 16px;
-        border-bottom: 2px solid #f0f2f5;
+        border-bottom: 1px solid #e2e8f0;
       }
 
       .app-header h1 {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-size: 1.8em;
+        color: #0f172a;
+        font-size: 1.6em;
         margin-bottom: 8px;
+        font-weight: 600;
+      }
+
+      .app-header h1 i {
+        color: #3b82f6;
+        margin-right: 8px;
       }
 
       .app-header p {
-        color: #718096;
+        color: #64748b;
         font-size: 0.85em;
       }
 
       /* Project Info Card */
       .project-info-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
         color: white;
-        padding: 20px;
-        border-radius: 20px;
-        margin-bottom: 20px;
+        padding: 20px 24px;
+        border-radius: 16px;
+        margin-bottom: 24px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -86,7 +91,7 @@
 
       .project-info-details {
         display: flex;
-        gap: 24px;
+        gap: 16px;
         flex-wrap: wrap;
       }
 
@@ -95,18 +100,22 @@
         align-items: center;
         gap: 8px;
         font-size: 13px;
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.1);
         padding: 6px 14px;
-        border-radius: 40px;
+        border-radius: 30px;
+      }
+
+      .project-info-item i {
+        color: #60a5fa;
       }
 
       .project-global-progress {
-        background: rgba(255, 255, 255, 0.2);
-        padding: 8px 16px;
-        border-radius: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 6px 16px;
+        border-radius: 30px;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
       }
 
       .project-global-progress progress {
@@ -115,48 +124,60 @@
         border-radius: 10px;
       }
 
+      .project-global-progress progress::-webkit-progress-bar {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+      }
+
+      .project-global-progress progress::-webkit-progress-value {
+        background: #3b82f6;
+        border-radius: 10px;
+      }
+
       /* Project Selector */
       .project-selector {
         background: #f8fafc;
         padding: 16px;
-        border-radius: 20px;
+        border-radius: 16px;
         margin-bottom: 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
         gap: 15px;
+        border: 1px solid #e2e8f0;
       }
 
       .project-tabs {
         display: flex;
-        gap: 10px;
+        gap: 8px;
         flex-wrap: wrap;
       }
 
       .project-tab {
-        padding: 8px 18px;
+        padding: 8px 16px;
         background: white;
-        border: 2px solid #e2e8f0;
-        border-radius: 40px;
+        border: 1px solid #e2e8f0;
+        border-radius: 30px;
         cursor: pointer;
-        transition: all 0.3s;
+        transition: all 0.2s;
         display: flex;
         align-items: center;
         gap: 8px;
         font-size: 13px;
         font-weight: 500;
+        color: #334155;
       }
 
       .project-tab:hover {
-        border-color: #667eea;
-        transform: translateY(-2px);
+        border-color: #3b82f6;
+        background: #eff6ff;
       }
 
       .project-tab.active {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #1e293b;
         color: white;
-        border-color: transparent;
+        border-color: #1e293b;
       }
 
       .project-tab .delete-project {
@@ -169,10 +190,12 @@
         justify-content: center;
         font-size: 10px;
         cursor: pointer;
+        transition: all 0.2s;
       }
 
       .project-tab .delete-project:hover {
-        background: #f56565;
+        background: #ef4444;
+        color: white;
       }
 
       /* Mobile Project Selector */
@@ -183,18 +206,20 @@
 
       .mobile-project-header {
         background: white;
-        padding: 14px 16px;
-        border-radius: 16px;
+        padding: 12px 16px;
+        border-radius: 12px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         cursor: pointer;
         border: 1px solid #e2e8f0;
         font-weight: 500;
+        color: #1e293b;
       }
 
       .mobile-project-header i {
         transition: transform 0.3s;
+        color: #64748b;
       }
 
       .mobile-project-header.active i {
@@ -206,7 +231,7 @@
         overflow: hidden;
         transition: max-height 0.3s ease;
         background: white;
-        border-radius: 0 0 16px 16px;
+        border-radius: 0 0 12px 12px;
         border: 1px solid #e2e8f0;
         border-top: none;
       }
@@ -217,12 +242,13 @@
       }
 
       .mobile-project-item {
-        padding: 12px 16px;
+        padding: 10px 16px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid #f0f2f5;
+        border-bottom: 1px solid #f1f5f9;
         cursor: pointer;
+        color: #334155;
       }
 
       .mobile-project-item:last-child {
@@ -230,8 +256,8 @@
       }
 
       .mobile-project-item.active {
-        background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
-        color: #667eea;
+        background: #eff6ff;
+        color: #3b82f6;
         font-weight: 600;
       }
 
@@ -239,87 +265,145 @@
       .project-actions,
       .header-actions {
         display: flex;
-        gap: 10px;
+        gap: 8px;
         flex-wrap: wrap;
       }
 
       button {
-        padding: 8px 18px;
+        padding: 8px 16px;
         border: none;
-        border-radius: 40px;
+        border-radius: 30px;
         cursor: pointer;
         font-size: 13px;
         font-weight: 500;
-        transition: all 0.3s;
+        transition: all 0.2s;
         display: inline-flex;
         align-items: center;
         gap: 8px;
       }
 
       .btn-primary {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #1e293b;
         color: white;
       }
       .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        background: #0f172a;
+        transform: translateY(-1px);
       }
+
       .btn-success {
-        background: #48bb78;
+        background: #059669;
         color: white;
       }
       .btn-success:hover {
-        background: #38a169;
-        transform: translateY(-2px);
+        background: #047857;
+        transform: translateY(-1px);
       }
+
       .btn-danger {
-        background: #f56565;
+        background: #dc2626;
         color: white;
       }
       .btn-danger:hover {
-        background: #e53e3e;
-        transform: translateY(-2px);
+        background: #b91c1c;
+        transform: translateY(-1px);
       }
+
       .btn-warning {
-        background: #ed8936;
+        background: #d97706;
         color: white;
       }
+      .btn-warning:hover {
+        background: #b45309;
+        transform: translateY(-1px);
+      }
+
       .btn-info {
-        background: #4299e1;
+        background: #2563eb;
         color: white;
       }
+      .btn-info:hover {
+        background: #1d4ed8;
+        transform: translateY(-1px);
+      }
+
       .btn-secondary {
-        background: #718096;
+        background: #64748b;
         color: white;
       }
+      .btn-secondary:hover {
+        background: #475569;
+        transform: translateY(-1px);
+      }
+
       .btn-purple {
-        background: #9f7aea;
+        background: #7c3aed;
         color: white;
+      }
+      .btn-purple:hover {
+        background: #6d28d9;
+        transform: translateY(-1px);
+      }
+
+      .btn-outline {
+        background: transparent;
+        border: 1px solid #cbd5e1;
+        color: #475569;
+      }
+      .btn-outline:hover {
+        background: #f1f5f9;
+        border-color: #94a3b8;
       }
 
       .header-actions {
         margin-bottom: 24px;
         padding-bottom: 8px;
-        border-bottom: 1px solid #f0f2f5;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      /* Search Section */
+      .search-section {
+        margin-bottom: 20px;
+        padding: 16px;
+        background: #f8fafc;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+      }
+
+      .search-section input,
+      .search-section select {
+        padding: 10px 16px;
+        border: 1px solid #cbd5e1;
+        border-radius: 30px;
+        font-size: 14px;
+        background: white;
+        transition: all 0.2s;
+      }
+
+      .search-section input:focus,
+      .search-section select:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
       }
 
       /* Etapas */
       .etapa-container {
         margin-bottom: 20px;
         border: 1px solid #e2e8f0;
-        border-radius: 20px;
+        border-radius: 16px;
         overflow: hidden;
         background: white;
       }
 
       .etapa-header {
         background: #f8fafc;
-        padding: 16px 20px;
+        padding: 14px 20px;
         cursor: pointer;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        transition: background 0.3s;
+        transition: background 0.2s;
       }
 
       .etapa-header:hover {
@@ -329,19 +413,19 @@
       .etapa-header-left {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 12px;
         flex-wrap: wrap;
       }
 
       .etapa-titulo {
-        font-weight: 700;
+        font-weight: 600;
         font-size: 1em;
-        color: #1e293b;
+        color: #0f172a;
       }
 
       .etapa-fechas {
         font-size: 11px;
-        color: #64748b;
+        color: #475569;
         background: #e2e8f0;
         padding: 4px 10px;
         border-radius: 20px;
@@ -352,7 +436,8 @@
         padding: 4px 10px;
         border-radius: 20px;
         font-size: 11px;
-        font-weight: 600;
+        font-weight: 500;
+        color: #1e293b;
       }
 
       .etapa-days,
@@ -360,16 +445,16 @@
         padding: 4px 10px;
         border-radius: 20px;
         font-size: 11px;
-        font-weight: 600;
+        font-weight: 500;
       }
 
       .etapa-days {
-        background: #e0e7ff;
-        color: #4c51bf;
+        background: #dbeafe;
+        color: #1e40af;
       }
       .etapa-days-remaining {
-        background: #fed7d7;
-        color: #c53030;
+        background: #fee2e2;
+        color: #b91c1c;
       }
 
       .etapa-header-right {
@@ -380,18 +465,18 @@
 
       .etapa-actions {
         display: flex;
-        gap: 8px;
+        gap: 6px;
       }
 
       .etapa-actions button {
-        padding: 6px 12px;
+        padding: 5px 12px;
         font-size: 11px;
         border-radius: 8px;
       }
 
       .etapa-header i {
         transition: transform 0.3s;
-        color: #667eea;
+        color: #64748b;
       }
 
       .etapa-header.collapsed i {
@@ -431,12 +516,12 @@
       table {
         width: 100%;
         border-collapse: collapse;
-        min-width: 700px;
+        min-width: 800px;
       }
 
       th,
       td {
-        padding: 12px 10px;
+        padding: 12px 12px;
         text-align: left;
         border-bottom: 1px solid #e2e8f0;
         font-size: 13px;
@@ -444,8 +529,9 @@
       }
 
       th {
-        background: #f8fafc;
+        background: #f1f5f9;
         font-weight: 600;
+        color: #0f172a;
         border-bottom: 2px solid #e2e8f0;
       }
 
@@ -454,20 +540,21 @@
       }
 
       tr.priority-high {
-        background-color: #fff5f5;
-        border-left: 3px solid #f56565;
+        background-color: #fef2f2;
+        border-left: 3px solid #ef4444;
       }
       tr.priority-medium {
-        background-color: #fffaf0;
-        border-left: 3px solid #ed8936;
+        background-color: #fffbeb;
+        border-left: 3px solid #f59e0b;
       }
       tr.priority-low {
-        background-color: #f0fff4;
-        border-left: 3px solid #48bb78;
+        background-color: #f0fdf4;
+        border-left: 3px solid #10b981;
       }
       tr.completed {
         opacity: 0.7;
-        background-color: #f7fafc;
+        background-color: #f8fafc;
+        text-decoration: line-through;
       }
 
       .action-buttons {
@@ -490,16 +577,16 @@
         display: inline-block;
       }
       .priority-badge.high {
-        background: #fed7d7;
-        color: #c53030;
+        background: #fee2e2;
+        color: #b91c1c;
       }
       .priority-badge.medium {
-        background: #feebc8;
-        color: #dd6b20;
+        background: #fef3c7;
+        color: #b45309;
       }
       .priority-badge.low {
-        background: #c6f6d5;
-        color: #276749;
+        background: #d1fae5;
+        color: #047857;
       }
 
       .responsable-badge {
@@ -509,8 +596,8 @@
         padding: 4px 10px;
         border-radius: 20px;
         font-size: 11px;
-        background: #e0e7ff;
-        color: #4c51bf;
+        background: #dbeafe;
+        color: #1e40af;
       }
 
       .countdown-badge {
@@ -521,25 +608,207 @@
         font-weight: 500;
       }
       .countdown-urgent {
-        background: #fed7d7;
-        color: #c53030;
+        background: #fee2e2;
+        color: #b91c1c;
       }
       .countdown-warning {
-        background: #feebc8;
-        color: #dd6b20;
+        background: #fef3c7;
+        color: #b45309;
       }
       .countdown-normal {
-        background: #c6f6d5;
-        color: #276749;
+        background: #d1fae5;
+        color: #047857;
       }
       .countdown-completed {
         background: #e2e8f0;
-        color: #718096;
+        color: #475569;
       }
 
       .note-text {
         white-space: pre-wrap;
         line-height: 1.4;
+      }
+
+      /* Comment item */
+      .comment-item {
+        background: white;
+        border-radius: 10px;
+        padding: 8px 12px;
+        margin-bottom: 8px;
+        border: 1px solid #e2e8f0;
+      }
+
+      .comment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 11px;
+        color: #64748b;
+        margin-bottom: 6px;
+      }
+
+      .comment-text {
+        font-size: 12px;
+        color: #1e293b;
+        line-height: 1.4;
+      }
+
+      /* Date range highlight */
+      .date-range-highlight {
+        background: #fef3c7;
+        border-radius: 12px;
+        padding: 12px;
+        margin-bottom: 16px;
+        font-size: 12px;
+        color: #92400e;
+        border: 1px solid #fde68a;
+      }
+
+      .date-warning {
+        background: #fee2e2;
+        border: 1px solid #fecaca;
+        color: #991b1b;
+      }
+
+      .range-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      /* Estilos para el modal de ayuda */
+      .help-tab {
+        transition: all 0.2s;
+      }
+      .help-tab:hover {
+        background: #f1f5f9;
+      }
+      .help-tab.active {
+        color: #3b82f6;
+        border-bottom: 2px solid #3b82f6;
+      }
+
+      .help-panel {
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .help-collapsible {
+        margin-bottom: 8px;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .help-collapsible-header {
+        background: #f8fafc;
+        padding: 12px 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: background 0.2s;
+        font-size: 13px;
+        color: #0f172a;
+      }
+
+      .help-collapsible-header:hover {
+        background: #f1f5f9;
+      }
+
+      .help-collapsible-header i {
+        transition: transform 0.3s;
+        color: #64748b;
+        font-size: 12px;
+      }
+
+      .help-collapsible-header.open i {
+        transform: rotate(90deg);
+      }
+
+      .help-badge {
+        margin-left: auto;
+        background: #e2e8f0;
+        color: #475569;
+        padding: 2px 8px;
+        border-radius: 20px;
+        font-size: 10px;
+        font-weight: 500;
+      }
+
+      .help-collapsible-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        background: white;
+        padding: 0 16px;
+      }
+
+      .help-collapsible-content.open {
+        max-height: 300px;
+        padding: 12px 16px;
+      }
+
+      /* Estilos para FAQ */
+      .faq-item {
+        margin-bottom: 12px;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .faq-question {
+        background: #f8fafc;
+        padding: 12px 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 500;
+        font-size: 13px;
+        color: #0f172a;
+        transition: background 0.2s;
+      }
+
+      .faq-question:hover {
+        background: #f1f5f9;
+      }
+
+      .faq-question i {
+        transition: transform 0.3s;
+        color: #64748b;
+        font-size: 12px;
+      }
+
+      .faq-question.open i {
+        transform: rotate(90deg);
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        padding: 0 16px;
+        background: white;
+        font-size: 13px;
+        color: #475569;
+        line-height: 1.5;
+      }
+
+      .faq-answer.open {
+        max-height: 200px;
+        padding: 12px 16px;
       }
 
       /* Modal */
@@ -551,22 +820,23 @@
         top: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(15, 23, 42, 0.5);
         backdrop-filter: blur(4px);
       }
 
       .modal-content {
         background: white;
         margin: 5% auto;
-        border-radius: 24px;
+        border-radius: 20px;
         width: 90%;
-        max-width: 550px;
+        max-width: 650px;
         animation: modalSlideIn 0.3s ease;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
       }
 
       @keyframes modalSlideIn {
         from {
-          transform: translateY(-50px);
+          transform: translateY(-30px);
           opacity: 0;
         }
         to {
@@ -577,9 +847,9 @@
 
       .modal-header {
         padding: 18px 24px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #1e293b;
         color: white;
-        border-radius: 24px 24px 0 0;
+        border-radius: 20px 20px 0 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -587,49 +857,57 @@
 
       .modal-header h3 {
         margin: 0;
-        font-size: 1.2em;
+        font-size: 1.1em;
+        font-weight: 600;
       }
       .close {
-        color: white;
+        color: #94a3b8;
         font-size: 28px;
         cursor: pointer;
-        transition: transform 0.2s;
+        transition: color 0.2s;
       }
       .close:hover {
-        transform: scale(1.1);
+        color: white;
       }
 
       .modal-body {
         padding: 24px;
-        max-height: 60vh;
+        max-height: 65vh;
         overflow-y: auto;
       }
+
       .form-field {
         margin-bottom: 16px;
       }
+
       .form-field label {
         display: block;
         font-weight: 600;
         margin-bottom: 6px;
-        color: #1e293b;
+        color: #0f172a;
         font-size: 13px;
       }
+
       .form-field input,
       .form-field select,
       .form-field textarea {
         width: 100%;
         padding: 10px 14px;
-        border: 2px solid #e2e8f0;
+        border: 1px solid #cbd5e1;
         border-radius: 12px;
         font-size: 14px;
         transition: all 0.2s;
+        background: white;
       }
+
       .form-field input:focus,
       .form-field select:focus,
       .form-field textarea:focus {
         outline: none;
-        border-color: #667eea;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
       }
+
       .form-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -642,6 +920,8 @@
         gap: 12px;
         justify-content: flex-end;
         border-top: 1px solid #e2e8f0;
+        background: #f8fafc;
+        border-radius: 0 0 20px 20px;
       }
 
       /* Dependencies */
@@ -663,9 +943,19 @@
         gap: 8px;
         padding: 6px 12px;
         background: white;
-        border-radius: 40px;
+        border-radius: 30px;
         border: 1px solid #e2e8f0;
         font-size: 12px;
+      }
+
+      /* Comments list */
+      .comments-list {
+        max-height: 200px;
+        overflow-y: auto;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 10px;
+        background: #f8fafc;
       }
 
       /* Gantt */
@@ -673,8 +963,15 @@
         margin-top: 20px;
         padding: 20px;
         background: white;
-        border-radius: 20px;
+        border-radius: 16px;
         border: 1px solid #e2e8f0;
+      }
+
+      .gantt-container h3 {
+        color: #0f172a;
+        font-size: 1.1em;
+        margin-bottom: 16px;
+        font-weight: 600;
       }
 
       #ganttChart {
@@ -688,7 +985,7 @@
         bottom: 24px;
         right: 24px;
         padding: 12px 20px;
-        border-radius: 40px;
+        border-radius: 30px;
         color: white;
         z-index: 1100;
         font-size: 13px;
@@ -708,18 +1005,28 @@
       }
 
       .toast-success {
-        background: #48bb78;
+        background: #059669;
       }
       .toast-error {
-        background: #f56565;
+        background: #dc2626;
       }
       .toast-info {
-        background: #4299e1;
+        background: #2563eb;
       }
 
       progress {
         width: 80px;
         height: 6px;
+        border-radius: 10px;
+      }
+
+      progress::-webkit-progress-bar {
+        background: #e2e8f0;
+        border-radius: 10px;
+      }
+
+      progress::-webkit-progress-value {
+        background: #3b82f6;
         border-radius: 10px;
       }
 
@@ -745,11 +1052,12 @@
         justify-content: space-between;
         align-items: center;
         font-weight: 600;
+        color: #0f172a;
       }
 
       .range-section-header i {
         transition: transform 0.3s;
-        color: #667eea;
+        color: #64748b;
       }
       .range-section-header.collapsed i {
         transform: rotate(-90deg);
@@ -781,48 +1089,98 @@
         align-items: center;
         background: white;
         padding: 6px 12px;
-        border-radius: 40px;
+        border-radius: 30px;
         border: 1px solid #e2e8f0;
       }
       .range-inputs label {
         font-size: 12px;
         font-weight: 500;
+        color: #475569;
       }
       .range-inputs input {
         padding: 4px 8px;
-        border: 1px solid #e2e8f0;
+        border: 1px solid #cbd5e1;
         border-radius: 16px;
         font-size: 12px;
       }
+
       .quick-buttons {
         display: flex;
         gap: 8px;
         flex-wrap: wrap;
         margin-bottom: 12px;
       }
+
       .quick-btn {
         padding: 4px 12px;
         font-size: 11px;
         background: white;
-        border: 1px solid #e2e8f0;
+        border: 1px solid #cbd5e1;
         border-radius: 20px;
         cursor: pointer;
         transition: all 0.2s;
+        color: #475569;
       }
+
       .quick-btn:hover {
-        background: #667eea;
+        background: #1e293b;
         color: white;
-        border-color: #667eea;
+        border-color: #1e293b;
       }
+
       .range-badge {
         display: flex;
         align-items: center;
         gap: 5px;
         font-size: 11px;
-        color: #667eea;
-        background: #e0e7ff;
+        color: #1e40af;
+        background: #dbeafe;
         padding: 6px 12px;
         border-radius: 20px;
+      }
+
+      /* Comment modal */
+      .comment-item-modal {
+        background: white;
+        border-radius: 10px;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        border: 1px solid #e2e8f0;
+      }
+
+      .comment-header-modal {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .comment-date-modal {
+        font-size: 10px;
+        color: #94a3b8;
+      }
+
+      .comment-text-modal {
+        font-size: 13px;
+        color: #1e293b;
+        line-height: 1.5;
+      }
+
+      .delete-comment-modal {
+        background: none;
+        border: none;
+        color: #ef4444;
+        cursor: pointer;
+        font-size: 12px;
+        padding: 4px 8px;
+        border-radius: 6px;
+        transition: all 0.2s;
+      }
+
+      .delete-comment-modal:hover {
+        background: #fee2e2;
       }
 
       /* Responsive */
@@ -833,20 +1191,17 @@
         .container {
           padding: 16px;
         }
-
         .project-tabs {
           display: none;
         }
         .mobile-project-selector {
           display: block;
         }
-
         .project-actions,
         .header-actions {
           width: 100%;
           justify-content: center;
         }
-
         .project-actions button,
         .header-actions button {
           flex: 1;
@@ -854,42 +1209,33 @@
           font-size: 11px;
           padding: 8px 12px;
         }
-
         .project-info-details {
-          gap: 12px;
+          gap: 10px;
         }
         .project-info-item {
           font-size: 11px;
           padding: 4px 10px;
         }
-
         .etapa-header-left {
-          gap: 10px;
+          gap: 8px;
         }
         .etapa-titulo {
           font-size: 14px;
         }
-        .etapa-fechas,
-        .etapa-progress,
-        .etapa-days,
-        .etapa-days-remaining {
-          font-size: 10px;
-        }
-
-        th,
-        td {
-          font-size: 11px;
-          padding: 8px 6px;
-        }
-
         .form-row {
           grid-template-columns: 1fr;
           gap: 10px;
         }
-
         .modal-content {
           margin: 20% auto;
           width: 95%;
+        }
+        .search-section div {
+          flex-direction: column;
+        }
+        .search-section input,
+        .search-section select {
+          width: 100%;
         }
       }
 
@@ -908,12 +1254,10 @@
     <div class="container">
       <div class="app-header">
         <h1>
-          <i class="fas fa-project-diagram"></i>Gestión profesional de proyectos
-          con etapas, actividades y cronogramas
+          <i class="fas fa-project-diagram"></i> GanttFlow
         </h1>
       </div>
 
-      <!-- Project Info -->
       <div class="project-info-card" id="projectInfoCard">
         <div class="project-info-details">
           <div class="project-info-item">
@@ -926,11 +1270,11 @@
             <span id="projectEndDate">—</span>
           </div>
           <div class="project-info-item">
-            <i class="fas fa-hourglass-half"></i> Duración:
-            <span id="projectDuration">0</span> días
+            <i class="fas fa-hourglass-half"></i> Duracion:
+            <span id="projectDuration">0</span> dias
           </div>
           <div class="project-info-item">
-            <i class="fas fa-clock"></i> Días restantes:
+            <i class="fas fa-clock"></i> Dias restantes:
             <span id="projectDaysRemaining">0</span>
           </div>
         </div>
@@ -941,7 +1285,6 @@
         </div>
       </div>
 
-      <!-- Project Selector Desktop -->
       <div class="project-selector">
         <div class="project-tabs" id="projectTabs"></div>
         <div class="mobile-project-selector" id="mobileProjectSelector">
@@ -979,13 +1322,15 @@
         </div>
       </div>
 
-      <!-- Actions -->
       <div class="header-actions">
         <button id="newEtapaBtn" class="btn-primary">
           <i class="fas fa-layer-group"></i> Nueva Etapa
         </button>
         <button id="customizeBtn" class="btn-info">
           <i class="fas fa-palette"></i> Personalizar
+        </button>
+        <button id="helpBtn" class="btn-secondary">
+          <i class="fas fa-question-circle"></i> Ayuda
         </button>
         <button id="exportAllBtn" class="btn-secondary">
           <i class="fas fa-database"></i> Backup
@@ -1001,10 +1346,38 @@
         />
       </div>
 
-      <!-- Etapas Container -->
+      <div class="search-section">
+        <div
+          style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center"
+        >
+          <i class="fas fa-search" style="color: #667eea"></i>
+          <input
+            type="text"
+            id="globalSearchInput"
+            placeholder="Buscar por actividad, responsable, comentario..."
+            style="flex: 2"
+          />
+          <select id="searchFilter">
+            <option value="all">Todos</option>
+            <option value="task">Actividades</option>
+            <option value="responsable">Por responsable</option>
+            <option value="comment">Comentarios</option>
+          </select>
+          <button id="searchReportBtn" class="btn-primary">
+            <i class="fas fa-file-alt"></i> Generar Reporte
+          </button>
+          <button id="clearSearchBtn" class="btn-secondary">
+            <i class="fas fa-times"></i> Limpiar
+          </button>
+        </div>
+        <div
+          id="searchResultsCount"
+          style="margin-top: 8px; font-size: 12px; color: #718096"
+        ></div>
+      </div>
+
       <div id="etapasContainer"></div>
 
-      <!-- Gantt Chart -->
       <div class="gantt-container">
         <h3>
           <i class="fas fa-chart-gantt"></i> Diagrama de Gantt -
@@ -1012,13 +1385,13 @@
         </h3>
         <div id="ganttChart">
           <div style="text-align: center; padding: 60px">
-            Cargando gráfico...
+            Cargando grafico...
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Modales -->
+    <!-- Modal Tarea -->
     <div id="taskModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
@@ -1076,6 +1449,26 @@
               <label>Color</label
               ><input type="color" id="taskColor" value="#667eea" />
             </div>
+            <div class="form-field">
+              <label><i class="fas fa-comments"></i> Comentarios</label>
+              <div id="commentsList" class="comments-list"></div>
+              <div style="margin-top: 8px; display: flex; gap: 8px">
+                <input
+                  type="text"
+                  id="commentText"
+                  placeholder="Escribe un comentario..."
+                  style="flex: 2"
+                />
+                <button
+                  type="button"
+                  id="addCommentBtn"
+                  class="btn-info"
+                  style="padding: 6px 12px"
+                >
+                  Agregar
+                </button>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn-warning" id="cancelTaskBtn">
@@ -1086,6 +1479,7 @@
       </div>
     </div>
 
+    <!-- Modal Nota -->
     <div id="noteModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
@@ -1109,6 +1503,7 @@
       </div>
     </div>
 
+    <!-- Modal Etapa -->
     <div id="etapaModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
@@ -1130,7 +1525,7 @@
               </div>
             </div>
             <div class="form-field">
-              <label>Descripción</label
+              <label>Descripcion</label
               ><textarea id="etapaDesc" rows="2"></textarea>
             </div>
           </div>
@@ -1143,10 +1538,11 @@
       </div>
     </div>
 
+    <!-- Modal Proyecto -->
     <div id="projectInfoModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
-          <h3>Información del Proyecto</h3>
+          <h3>Informacion del Proyecto</h3>
           <span class="close close-project-info">&times;</span>
         </div>
         <form id="projectInfoForm">
@@ -1179,6 +1575,7 @@
       </div>
     </div>
 
+    <!-- Modal Personalizar -->
     <div id="customizeModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
@@ -1236,7 +1633,7 @@
                   </button>
                 </div>
                 <div class="range-badge" id="rangeBadge">
-                  <i class="fas fa-chart-line"></i> Rango automático
+                  <i class="fas fa-chart-line"></i> Rango automatico
                 </div>
               </div>
             </div>
@@ -1265,7 +1662,7 @@
             <div class="form-field">
               <label>Vista</label
               ><select id="modalViewMode">
-                <option value="Day">Día</option>
+                <option value="Day">Dia</option>
                 <option value="Week" selected>Semana</option>
                 <option value="Month">Mes</option>
               </select>
@@ -1305,12 +1702,485 @@
       </div>
     </div>
 
+    <!-- Modal Comentarios -->
+    <div id="commentsModal" class="modal">
+      <div class="modal-content" style="max-width: 600px">
+        <div class="modal-header">
+          <h3><i class="fas fa-comments"></i> Comentarios de la Actividad</h3>
+          <span class="close close-comments-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div
+            id="commentsModalTaskInfo"
+            style="
+              background: #f3f4f6;
+              padding: 12px;
+              border-radius: 12px;
+              margin-bottom: 16px;
+            "
+          >
+            <strong id="commentsModalTaskName">Cargando...</strong>
+            <div
+              style="font-size: 12px; color: #6b7280; margin-top: 4px"
+              id="commentsModalTaskMeta"
+            ></div>
+          </div>
+          <div
+            id="commentsModalList"
+            style="
+              max-height: 300px;
+              overflow-y: auto;
+              margin-bottom: 16px;
+              border: 1px solid #e5e7eb;
+              border-radius: 12px;
+              padding: 12px;
+              background: #fafafa;
+            "
+          >
+            <div style="text-align: center; color: #9ca3af; padding: 20px">
+              Cargando comentarios...
+            </div>
+          </div>
+          <div style="border-top: 1px solid #e5e7eb; padding-top: 16px">
+            <label
+              style="
+                font-weight: 600;
+                font-size: 13px;
+                margin-bottom: 8px;
+                display: block;
+              "
+              >Agregar nuevo comentario</label
+            >
+            <textarea
+              id="commentsModalText"
+              rows="3"
+              placeholder="Escribe tu comentario..."
+              style="
+                width: 100%;
+                padding: 10px;
+                border: 2px solid #e2e8f0;
+                border-radius: 12px;
+                margin-bottom: 12px;
+              "
+            ></textarea>
+            <div style="display: flex; gap: 10px; justify-content: flex-end">
+              <button type="button" id="cancelCommentsBtn" class="btn-warning">
+                Cancelar
+              </button>
+              <button type="button" id="saveCommentsBtn" class="btn-primary">
+                <i class="fas fa-paper-plane"></i> Agregar Comentario
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de Ayuda / Documentación -->
+    <div id="helpModal" class="modal">
+      <div class="modal-content" style="max-width: 750px">
+        <div class="modal-header">
+          <h3><i class="fas fa-question-circle"></i> Centro de Ayuda</h3>
+          <span class="close close-help">&times;</span>
+        </div>
+        <div class="modal-body" style="max-height: 70vh">
+          <!-- Pestañas -->
+          <div
+            style="
+              display: flex;
+              gap: 4px;
+              margin-bottom: 20px;
+              border-bottom: 1px solid #e2e8f0;
+            "
+          >
+            <button
+              id="helpDocTab"
+              class="help-tab active"
+              style="
+                background: none;
+                border: none;
+                padding: 10px 20px;
+                cursor: pointer;
+                font-weight: 500;
+                color: #3b82f6;
+                border-bottom: 2px solid #3b82f6;
+                border-radius: 0;
+              "
+            >
+              Documentación
+            </button>
+            <button
+              id="helpFaqTab"
+              class="help-tab"
+              style="
+                background: none;
+                border: none;
+                padding: 10px 20px;
+                cursor: pointer;
+                font-weight: 500;
+                color: #64748b;
+                border-radius: 0;
+              "
+            >
+              Preguntas Frecuentes
+            </button>
+          </div>
+
+          <!-- Panel de Documentación -->
+          <div id="helpDocPanel" class="help-panel">
+            <div style="margin-bottom: 20px">
+              <h4 style="color: #0f172a; margin-bottom: 12px; font-size: 16px">
+                📋 Introducción
+              </h4>
+              <p style="color: #475569; font-size: 13px; line-height: 1.5">
+                Gestor Profesional de Proyectos te permite organizar y dar
+                seguimiento a tus proyectos mediante etapas, actividades y
+                cronogramas visuales. Ideal para equipos de trabajo que
+                necesitan controlar plazos, responsables y progreso.
+              </p>
+            </div>
+
+            <!-- Sección colapsable: Proyectos -->
+            <div class="help-collapsible">
+              <div class="help-collapsible-header" data-section="proyectos">
+                <i class="fas fa-chevron-right"></i>
+                <strong>🏢 Gestión de Proyectos</strong>
+                <span class="help-badge">Básico</span>
+              </div>
+              <div class="help-collapsible-content" id="help-proyectos">
+                <ul
+                  style="
+                    margin-left: 20px;
+                    color: #475569;
+                    font-size: 13px;
+                    line-height: 1.6;
+                  "
+                >
+                  <li>
+                    <strong>Crear proyecto:</strong> Haz clic en "Nuevo" y
+                    asigna un nombre y responsable.
+                  </li>
+                  <li>
+                    <strong>Editar proyecto:</strong> Usa el botón "Datos" para
+                    modificar responsable y fechas del proyecto.
+                  </li>
+                  <li>
+                    <strong>Cambiar entre proyectos:</strong> Selecciona la
+                    pestaña del proyecto que deseas visualizar.
+                  </li>
+                  <li>
+                    <strong>Exportar/Importar:</strong> Puedes guardar un
+                    proyecto individual o hacer backup completo de todos los
+                    proyectos.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Sección colapsable: Etapas -->
+            <div class="help-collapsible">
+              <div class="help-collapsible-header" data-section="etapas">
+                <i class="fas fa-chevron-right"></i>
+                <strong>📌 Gestión de Etapas</strong>
+                <span class="help-badge">Básico</span>
+              </div>
+              <div class="help-collapsible-content" id="help-etapas">
+                <ul
+                  style="
+                    margin-left: 20px;
+                    color: #475569;
+                    font-size: 13px;
+                    line-height: 1.6;
+                  "
+                >
+                  <li>
+                    <strong>Crear etapa:</strong> Haz clic en "Nueva Etapa" y
+                    define nombre y fechas.
+                  </li>
+                  <li>
+                    <strong>Validación:</strong> Las fechas de etapa deben estar
+                    dentro del rango del proyecto.
+                  </li>
+                  <li>
+                    <strong>Colapsar/Expandir:</strong> Haz clic en el
+                    encabezado de la etapa para ocultar o mostrar su contenido.
+                  </li>
+                  <li>
+                    <strong>Editar/Eliminar:</strong> Usa los botones en la
+                    parte derecha de cada etapa.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Sección colapsable: Actividades -->
+            <div class="help-collapsible">
+              <div class="help-collapsible-header" data-section="actividades">
+                <i class="fas fa-chevron-right"></i>
+                <strong>✅ Gestión de Actividades</strong>
+                <span class="help-badge">Intermedio</span>
+              </div>
+              <div class="help-collapsible-content" id="help-actividades">
+                <ul
+                  style="
+                    margin-left: 20px;
+                    color: #475569;
+                    font-size: 13px;
+                    line-height: 1.6;
+                  "
+                >
+                  <li>
+                    <strong>Crear actividad:</strong> Dentro de una etapa, haz
+                    clic en "Nueva Actividad".
+                  </li>
+                  <li>
+                    <strong>Prioridad:</strong> Asigna prioridad Alta, Media o
+                    Baja (visualmente codificada por colores).
+                  </li>
+                  <li>
+                    <strong>Fechas:</strong> Deben estar dentro del rango de la
+                    etapa y del proyecto.
+                  </li>
+                  <li>
+                    <strong>Progreso:</strong> Actualiza el porcentaje de avance
+                    usando el deslizador.
+                  </li>
+                  <li>
+                    <strong>Dependencias:</strong> Una actividad puede depender
+                    de otra, afectando su orden.
+                  </li>
+                  <li>
+                    <strong>Comentarios:</strong> Cada actividad puede tener
+                    comentarios. Haz clic en el botón 💬 para gestionarlos.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Sección colapsable: Notas -->
+            <div class="help-collapsible">
+              <div class="help-collapsible-header" data-section="notas">
+                <i class="fas fa-chevron-right"></i>
+                <strong>📝 Notas por Etapa</strong>
+                <span class="help-badge">Básico</span>
+              </div>
+              <div class="help-collapsible-content" id="help-notas">
+                <ul
+                  style="
+                    margin-left: 20px;
+                    color: #475569;
+                    font-size: 13px;
+                    line-height: 1.6;
+                  "
+                >
+                  <li>
+                    <strong>Agregar notas:</strong> Usa el botón "Nueva Nota"
+                    dentro de cada etapa.
+                  </li>
+                  <li>
+                    <strong>Las notas son informativas:</strong> No afectan el
+                    progreso ni las fechas, ideales para recordatorios o ideas.
+                  </li>
+                  <li>
+                    <strong>Eliminar notas:</strong> Cada nota tiene un botón
+                    para eliminarla.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Sección colapsable: Reportes -->
+            <div class="help-collapsible">
+              <div class="help-collapsible-header" data-section="reportes">
+                <i class="fas fa-chevron-right"></i>
+                <strong>📊 Reportes y Exportación</strong>
+                <span class="help-badge">Intermedio</span>
+              </div>
+              <div class="help-collapsible-content" id="help-reportes">
+                <ul
+                  style="
+                    margin-left: 20px;
+                    color: #475569;
+                    font-size: 13px;
+                    line-height: 1.6;
+                  "
+                >
+                  <li>
+                    <strong>Reporte PDF:</strong> Genera un informe profesional
+                    con todas las etapas, actividades, prioridades, progreso y
+                    comentarios.
+                  </li>
+                  <li>
+                    <strong>Búsqueda global:</strong> Encuentra actividades por
+                    nombre, responsable o comentarios. Genera reporte de
+                    resultados.
+                  </li>
+                  <li>
+                    <strong>Exportar proyecto:</strong> Guarda un proyecto
+                    específico como archivo JSON.
+                  </li>
+                  <li>
+                    <strong>Backup completo:</strong> Exporta todos los
+                    proyectos y configuraciones como respaldo.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Sección colapsable: Diagrama Gantt -->
+            <div class="help-collapsible">
+              <div class="help-collapsible-header" data-section="gantt">
+                <i class="fas fa-chevron-right"></i>
+                <strong>📈 Diagrama de Gantt</strong>
+                <span class="help-badge">Avanzado</span>
+              </div>
+              <div class="help-collapsible-content" id="help-gantt">
+                <ul
+                  style="
+                    margin-left: 20px;
+                    color: #475569;
+                    font-size: 13px;
+                    line-height: 1.6;
+                  "
+                >
+                  <li>
+                    <strong>Visualización:</strong> Muestra todas las
+                    actividades en una línea de tiempo.
+                  </li>
+                  <li>
+                    <strong>Personalización:</strong> Ajusta altura de barras,
+                    ancho de columnas, colores y vista (Día/Semana/Mes).
+                  </li>
+                  <li>
+                    <strong>Rango manual:</strong> Puedes definir un rango de
+                    fechas específico para el diagrama.
+                  </li>
+                  <li>
+                    <strong>Interactivo:</strong> Haz clic en cualquier barra
+                    para editar la actividad.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel de Preguntas Frecuentes -->
+          <div id="helpFaqPanel" class="help-panel" style="display: none">
+            <div class="faq-item">
+              <div class="faq-question" data-faq="1">
+                <i class="fas fa-chevron-right"></i> ¿Cómo establezco fechas
+                para el proyecto?
+              </div>
+              <div class="faq-answer" id="faq-1">
+                Haz clic en el botón "Datos" en la sección de proyectos. Allí
+                podrás definir el responsable y las fechas de inicio y fin del
+                proyecto. Estas fechas servirán como límites para las etapas.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question" data-faq="2">
+                <i class="fas fa-chevron-right"></i> ¿Qué pasa si una actividad
+                tiene fecha fuera del rango?
+              </div>
+              <div class="faq-answer" id="faq-2">
+                El sistema mostrará una advertencia visual (fondo rojo) y no
+                permitirá guardar la actividad hasta que las fechas estén dentro
+                del rango permitido.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question" data-faq="3">
+                <i class="fas fa-chevron-right"></i> ¿Cómo funcionan las
+                dependencias entre actividades?
+              </div>
+              <div class="faq-answer" id="faq-3">
+                Al crear o editar una actividad, encontrarás una sección
+                "Dependencias". Puedes seleccionar de qué otras actividades
+                depende. Esto ayuda a visualizar el orden lógico en el diagrama
+                de Gantt.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question" data-faq="4">
+                <i class="fas fa-chevron-right"></i> ¿Puedo tener múltiples
+                proyectos?
+              </div>
+              <div class="faq-answer" id="faq-4">
+                Sí, puedes crear todos los proyectos que necesites. Usa las
+                pestañas superiores para cambiar entre ellos. El proyecto actual
+                se muestra resaltado.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question" data-faq="5">
+                <i class="fas fa-chevron-right"></i> ¿Cómo recupero mi
+                información si cierro el navegador?
+              </div>
+              <div class="faq-answer" id="faq-5">
+                Todos los datos se guardan automáticamente en el almacenamiento
+                local de tu navegador (localStorage). Al volver a abrir la
+                página, tus proyectos se cargarán automáticamente. Para mayor
+                seguridad, usa la opción "Backup" para exportar tus datos.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question" data-faq="6">
+                <i class="fas fa-chevron-right"></i> ¿Puedo editar una actividad
+                después de crearla?
+              </div>
+              <div class="faq-answer" id="faq-6">
+                Sí, cada actividad tiene un botón de edición (✏️) que te permite
+                modificar todos sus campos: nombre, responsable, prioridad,
+                fechas, progreso, color y dependencias.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question" data-faq="7">
+                <i class="fas fa-chevron-right"></i> ¿Cómo genero un reporte
+                profesional?
+              </div>
+              <div class="faq-answer" id="faq-7">
+                Haz clic en el botón "PDF" en la sección superior. Se abrirá una
+                nueva ventana con el reporte listo para imprimir o guardar como
+                PDF (Ctrl+P).
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question" data-faq="8">
+                <i class="fas fa-chevron-right"></i> ¿Qué significan los colores
+                en las actividades?
+              </div>
+              <div class="faq-answer" id="faq-8">
+                Rojo = Prioridad Alta / Atrasado, Amarillo = Prioridad Media /
+                Próximo a vencer, Verde = Prioridad Baja / Progreso normal, Gris
+                = Actividad completada.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="closeHelpBtn" class="btn-primary">
+            <i class="fas fa-check"></i> Entendido
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script>
       // ==================== DATOS GLOBALES ====================
       let projects = [];
       let currentProjectId = null;
       let currentEditTaskId = null;
       let currentEditEtapaId = null;
+      let currentCommentsTaskId = null;
+      let currentCommentsEtapaId = null;
 
       let customSettings = {
         barHeight: 30,
@@ -1324,6 +2194,8 @@
       };
 
       let rangeSettings = { manualMode: false, startDate: null, endDate: null };
+      let currentSearchTerm = "";
+      let currentSearchFilter = "all";
 
       // ==================== FUNCIONES AUXILIARES ====================
       function escapeHtml(text) {
@@ -1339,6 +2211,13 @@
         toast.innerHTML = `<i class="fas fa-${type === "success" ? "check-circle" : "exclamation-circle"}"></i> ${msg}`;
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 3000);
+      }
+
+      function formatDate(dateStr) {
+        if (!dateStr) return "";
+        const parts = dateStr.split("-");
+        if (parts.length !== 3) return dateStr;
+        return `${parts[2]}-${parts[1]}-${parts[0]}`;
       }
 
       function saveData() {
@@ -1376,8 +2255,8 @@
         if (progress === 100) return "Completado";
         if (days < 0) return `Atrasado (${Math.abs(days)}d)`;
         if (days === 0) return "Vence hoy";
-        if (days === 1) return "1 día restante";
-        return `${days} días restantes`;
+        if (days === 1) return "1 dia restante";
+        return `${days} dias restantes`;
       }
 
       function sortTasksByPriority(tasks) {
@@ -1421,9 +2300,9 @@
         document.getElementById("projectResponsable").textContent =
           project.responsable || "No asignado";
         document.getElementById("projectStartDate").textContent =
-          project.startDate || "—";
+          formatDate(project.startDate) || "—";
         document.getElementById("projectEndDate").textContent =
-          project.endDate || "—";
+          formatDate(project.endDate) || "—";
         document.getElementById("projectDuration").textContent =
           calculateDaysBetween(project.startDate, project.endDate);
         const daysRemaining = calculateDaysRemaining(
@@ -1438,7 +2317,6 @@
           `${globalProgress}%`;
       }
 
-      // Funciones de rango
       function updateRangeUI() {
         const startInput = document.getElementById("rangeStartDate");
         const endInput = document.getElementById("rangeEndDate");
@@ -1456,7 +2334,7 @@
           if (startInput) startInput.value = "";
           if (endInput) endInput.value = "";
           if (badge)
-            badge.innerHTML = `<i class="fas fa-chart-line"></i> Rango automático`;
+            badge.innerHTML = `<i class="fas fa-chart-line"></i> Rango automatico`;
         }
       }
 
@@ -1467,7 +2345,7 @@
         saveData();
         updateRangeUI();
         renderGanttChart();
-        showToast("Rango automático activado", "success");
+        showToast("Rango automatico activado", "success");
       }
 
       function setManualRange(startDate, endDate) {
@@ -1552,38 +2430,40 @@
             {
               id: "p1",
               name: "Proyecto Demo",
-              responsable: "Juan Pérez",
+              responsable: "Juan Perez",
               startDate: todayStr,
               endDate: day21.toISOString().split("T")[0],
               etapas: [
                 {
                   id: "e1",
-                  name: "Fase 1 - Investigación",
+                  name: "Fase 1 - Investigacion",
                   startDate: todayStr,
                   endDate: day7.toISOString().split("T")[0],
-                  description: "Investigación de mercado",
+                  description: "Investigacion de mercado",
                   tasks: [
                     {
                       id: "t1",
-                      name: "Investigación de mercado",
-                      responsable: "Ana García",
+                      name: "Investigacion de mercado",
+                      responsable: "Ana Garcia",
                       priority: "Media",
                       start: todayStr,
                       end: day7.toISOString().split("T")[0],
                       progress: 100,
                       dependencies: [],
                       color: "#48bb78",
+                      comments: [],
                     },
                     {
                       id: "t2",
-                      name: "Análisis de requisitos",
-                      responsable: "Carlos López",
+                      name: "Analisis de requisitos",
+                      responsable: "Carlos Lopez",
                       priority: "Alta",
                       start: todayStr,
                       end: day7.toISOString().split("T")[0],
                       progress: 80,
                       dependencies: [],
                       color: "#4299e1",
+                      comments: [],
                     },
                   ],
                   notes: [
@@ -1598,35 +2478,37 @@
                   name: "Fase 2 - Desarrollo",
                   startDate: day7.toISOString().split("T")[0],
                   endDate: day21.toISOString().split("T")[0],
-                  description: "Diseño y desarrollo",
+                  description: "Diseno y desarrollo",
                   tasks: [
                     {
                       id: "t3",
-                      name: "Diseño de interfaz",
-                      responsable: "María Díaz",
+                      name: "Diseno de interfaz",
+                      responsable: "Maria Diaz",
                       priority: "Alta",
                       start: day7.toISOString().split("T")[0],
                       end: day14.toISOString().split("T")[0],
                       progress: 60,
                       dependencies: [],
                       color: "#ed8936",
+                      comments: [],
                     },
                     {
                       id: "t4",
                       name: "Desarrollo backend",
-                      responsable: "Luis Martínez",
+                      responsable: "Luis Martinez",
                       priority: "Alta",
                       start: day14.toISOString().split("T")[0],
                       end: day21.toISOString().split("T")[0],
                       progress: 30,
                       dependencies: ["t3"],
                       color: "#9f7aea",
+                      comments: [],
                     },
                   ],
                   notes: [
                     {
                       id: "n2",
-                      text: "Idea: Implementar autenticación con OAuth",
+                      text: "Idea: Implementar autenticacion con OAuth",
                     },
                   ],
                 },
@@ -1646,6 +2528,153 @@
       function getEtapa(etapaId) {
         const project = getCurrentProject();
         return project.etapas?.find((e) => e.id === etapaId);
+      }
+
+      // ==================== COMENTARIOS ====================
+      function renderCommentsList(etapaId, taskId) {
+        const container = document.getElementById("commentsList");
+        if (!container) return;
+        if (!taskId) {
+          container.innerHTML =
+            '<div style="color:#999; text-align:center; padding:20px;">Guarde la actividad primero para agregar comentarios</div>';
+          return;
+        }
+        const etapa = getEtapa(etapaId);
+        const task = etapa.tasks?.find((t) => t.id === taskId);
+        if (!task || !task.comments || task.comments.length === 0) {
+          container.innerHTML =
+            '<div style="color:#999; text-align:center; padding:20px;">No hay comentarios</div>';
+          return;
+        }
+        container.innerHTML = task.comments
+          .map(
+            (comment) => `
+                <div class="comment-item" data-comment-id="${comment.id}">
+                    <div class="comment-header">
+                        <small>${comment.date}</small>
+                        <button class="delete-comment" data-task="${taskId}" data-comment="${comment.id}" data-etapa="${etapaId}" style="background:none; border:none; color:#f56565; cursor:pointer;"><i class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="comment-text">${escapeHtml(comment.text)}</div>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      function addComment(etapaId, taskId, text) {
+        const etapa = getEtapa(etapaId);
+        const task = etapa.tasks?.find((t) => t.id === taskId);
+        if (task) {
+          if (!task.comments) task.comments = [];
+          task.comments.push({
+            id: Date.now().toString(),
+            text: text,
+            date: new Date().toLocaleString(),
+          });
+          saveData();
+          renderCommentsList(etapaId, taskId);
+          showToast("Comentario agregado", "success");
+        }
+      }
+
+      function deleteComment(etapaId, taskId, commentId) {
+        const etapa = getEtapa(etapaId);
+        const task = etapa.tasks?.find((t) => t.id === taskId);
+        if (task && task.comments) {
+          task.comments = task.comments.filter((c) => c.id !== commentId);
+          saveData();
+          renderCommentsList(etapaId, taskId);
+          showToast("Comentario eliminado", "success");
+        }
+      }
+
+      function openCommentsModal(etapaId, taskId) {
+        currentCommentsEtapaId = etapaId;
+        currentCommentsTaskId = taskId;
+        const etapa = getEtapa(etapaId);
+        const task = etapa.tasks?.find((t) => t.id === taskId);
+        if (task) {
+          document.getElementById("commentsModalTaskName").innerHTML =
+            `<i class="fas fa-tasks"></i> ${escapeHtml(task.name)}`;
+          document.getElementById("commentsModalTaskMeta").innerHTML = `
+                    <span><i class="fas fa-user"></i> ${escapeHtml(task.responsable) || "Sin responsable"}</span> |
+                    <span><i class="fas fa-flag"></i> ${task.priority || "Media"}</span> |
+                    <span><i class="fas fa-chart-line"></i> ${task.progress || 0}%</span>
+                `;
+        }
+        renderCommentsModalList();
+        document.getElementById("commentsModal").style.display = "block";
+      }
+
+      function renderCommentsModalList() {
+        const container = document.getElementById("commentsModalList");
+        if (!currentCommentsTaskId || !currentCommentsEtapaId) {
+          container.innerHTML =
+            '<div style="text-align: center; color: #9ca3af; padding: 20px;">No hay comentarios</div>';
+          return;
+        }
+        const etapa = getEtapa(currentCommentsEtapaId);
+        const task = etapa.tasks?.find((t) => t.id === currentCommentsTaskId);
+        if (!task || !task.comments || task.comments.length === 0) {
+          container.innerHTML =
+            '<div style="text-align: center; color: #9ca3af; padding: 20px;"><i class="fas fa-comment-slash"></i> No hay comentarios aun.</div>';
+          return;
+        }
+        container.innerHTML = task.comments
+          .map(
+            (comment) => `
+                <div class="comment-item-modal">
+                    <div class="comment-header-modal">
+                        <span class="comment-date-modal">${comment.date}</span>
+                        <button class="delete-comment-modal" data-task="${currentCommentsTaskId}" data-comment="${comment.id}" data-etapa="${currentCommentsEtapaId}"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                    <div class="comment-text-modal">${escapeHtml(comment.text)}</div>
+                </div>
+            `,
+          )
+          .join("");
+        document.querySelectorAll(".delete-comment-modal").forEach((btn) => {
+          btn.onclick = (e) => {
+            e.stopPropagation();
+            const taskId = btn.dataset.task;
+            const commentId = btn.dataset.comment;
+            const etapaId = btn.dataset.etapa;
+            if (confirm("Eliminar este comentario?")) {
+              const etapa = getEtapa(etapaId);
+              const task = etapa.tasks?.find((t) => t.id === taskId);
+              if (task && task.comments) {
+                task.comments = task.comments.filter((c) => c.id !== commentId);
+                saveData();
+                renderCommentsModalList();
+                renderCommentsList(etapaId, taskId);
+                showToast("Comentario eliminado", "success");
+              }
+            }
+          };
+        });
+      }
+
+      function addCommentFromModal() {
+        const text = document.getElementById("commentsModalText").value.trim();
+        if (!text) {
+          showToast("Escribe un comentario", "error");
+          return;
+        }
+        const etapa = getEtapa(currentCommentsEtapaId);
+        const task = etapa.tasks?.find((t) => t.id === currentCommentsTaskId);
+        if (task) {
+          if (!task.comments) task.comments = [];
+          task.comments.push({
+            id: Date.now().toString(),
+            text: text,
+            date: new Date().toLocaleString(),
+          });
+          saveData();
+          document.getElementById("commentsModalText").value = "";
+          renderCommentsModalList();
+          renderCommentsList(currentCommentsEtapaId, currentCommentsTaskId);
+          showToast("Comentario agregado", "success");
+        }
       }
 
       // ==================== RENDERIZADO ====================
@@ -1704,10 +2733,27 @@
       }
 
       function renderTasksTable(etapa) {
-        if (!etapa.tasks || etapa.tasks.length === 0)
+        if (!etapa.tasks || etapa.tasks.length === 0) {
           return '<div style="padding:20px; text-align:center; color:#999;">No hay actividades</div>';
+        }
+
         const sortedTasks = sortTasksByPriority(etapa.tasks);
-        let html = `<div class="tasks-table"><table><thead><tr><th>Actividad</th><th>Responsable</th><th>Prioridad</th><th>Días rest.</th><th>Inicio</th><th>Fin</th><th>Progreso</th><th>Acciones</th></tr></thead><tbody>`;
+        let html = '<div class="tasks-table">';
+        html += "<table>";
+        html += "<thead>";
+        html += "<tr>";
+        html += "<th>Actividad</th>";
+        html += "<th>Responsable</th>";
+        html += "<th>Prioridad</th>";
+        html += "<th>Dias rest.</th>";
+        html += "<th>Inicio</th>";
+        html += "<th>Fin</th>";
+        html += "<th>Progreso</th>";
+        html += "<th>Acciones</th>";
+        html += "</tr>";
+        html += "</thead>";
+        html += "<tbody>";
+
         sortedTasks.forEach((task) => {
           const days = calculateDaysRemaining(task.end, task.progress);
           const countdownClass = getCountdownClass(days, task.progress);
@@ -1728,34 +2774,101 @@
             task.progress === 100
               ? "completed"
               : `priority-${task.priority === "Alta" ? "high" : task.priority === "Media" ? "medium" : "low"}`;
-          html += `<tr class="${rowClass}">
-                    <td>${escapeHtml(task.name)}</td>
-                    <td>${task.responsable ? `<span class="responsable-badge"><i class="fas fa-user"></i> ${escapeHtml(task.responsable)}</span>` : "-"}</td>
-                    <td><span class="priority-badge ${priorityClass}">${priorityText}</span></td>
-                    <td><span class="countdown-badge ${countdownClass}">${countdownText}</span></td>
-                    <td>${task.start}</td>
-                    <td>${task.end}</td>
-                    <td><progress value="${task.progress}" max="100"></progress> ${task.progress}%</td>
-                    <td class="action-buttons">
-                        <button class="btn-primary edit-task" data-id="${task.id}" data-etapa="${etapa.id}"><i class="fas fa-edit"></i></button>
-                        <button class="btn-danger delete-task" data-id="${task.id}" data-etapa="${etapa.id}"><i class="fas fa-trash"></i></button>
-                    </td>
-                <tr>`;
+
+          html += '<tr class="' + rowClass + '">';
+          html +=
+            '<td style="max-width:200px;">' + escapeHtml(task.name) + "</td>";
+          html +=
+            "<td>" +
+            (task.responsable
+              ? '<span class="responsable-badge"><i class="fas fa-user"></i> ' +
+                escapeHtml(task.responsable) +
+                "</span>"
+              : "-") +
+            "</td>";
+          html +=
+            '<td><span class="priority-badge ' +
+            priorityClass +
+            '">' +
+            priorityText +
+            "</span></td>";
+          html +=
+            '<td><span class="countdown-badge ' +
+            countdownClass +
+            '">' +
+            countdownText +
+            "</span></td>";
+          html += "<td>" + formatDate(task.start) + "</td>";
+          html += "<td>" + formatDate(task.end) + "</td>";
+          html +=
+            '<td><progress value="' +
+            task.progress +
+            '" max="100"></progress> ' +
+            task.progress +
+            "%</td>";
+          html += '<td class="action-buttons">';
+          html +=
+            '<button class="btn-primary edit-task" data-id="' +
+            task.id +
+            '" data-etapa="' +
+            etapa.id +
+            '"><i class="fas fa-edit"></i></button>';
+          html +=
+            '<button class="btn-info comments-task" data-id="' +
+            task.id +
+            '" data-etapa="' +
+            etapa.id +
+            '" style="background:#8b5cf6;"><i class="fas fa-comments"></i></button>';
+          html +=
+            '<button class="btn-danger delete-task" data-id="' +
+            task.id +
+            '" data-etapa="' +
+            etapa.id +
+            '"><i class="fas fa-trash"></i></button>';
+          html += "</td>";
+          html += "</tr>";
         });
-        html += `</tbody></table></div>`;
+
+        html += "</tbody>";
+        html += "</table>";
+        html += "</div>";
+
         return html;
       }
 
       function renderNotesTable(etapa) {
-        if (!etapa.notes || etapa.notes.length === 0)
+        if (!etapa.notes || etapa.notes.length === 0) {
           return '<div style="padding:20px; text-align:center; color:#999;">No hay notas</div>';
-        let html = `<div class="notes-table"><table><thead><tr><th>Nota</th><th>Acciones</th></tr></thead><tbody>`;
+        }
+
+        let html = '<div class="notes-table">';
+        html += "<table>";
+        html += "<thead>";
+        html += "<tr>";
+        html += "<th>Nota</th>";
+        html += "<th>Acciones</th>";
+        html += "</tr>";
+        html += "</thead>";
+        html += "<tbody>";
+
         etapa.notes.forEach((note) => {
-          html += `<tr><td class="note-text">${escapeHtml(note.text)}</td>
-                    <td><button class="btn-danger delete-note" data-id="${note.id}" data-etapa="${etapa.id}" style="padding:4px 12px;"><i class="fas fa-trash"></i></button></td>
-                </tr>`;
+          html += "<tr>";
+          html += '<td class="note-text">' + escapeHtml(note.text) + "</td>";
+          html += '<td style="width:80px;">';
+          html +=
+            '<button class="btn-danger delete-note" data-id="' +
+            note.id +
+            '" data-etapa="' +
+            etapa.id +
+            '" style="padding:4px 12px;"><i class="fas fa-trash"></i> Eliminar</button>';
+          html += "</td>";
+          html += "</tr>";
         });
-        html += `</tbody></table></div>`;
+
+        html += "</tbody>";
+        html += "</table>";
+        html += "</div>";
+
         return html;
       }
 
@@ -1793,10 +2906,10 @@
                         <div class="etapa-header-left">
                             <i class="fas fa-chevron-down"></i>
                             <span class="etapa-titulo">${escapeHtml(etapa.name)}</span>
-                            ${etapa.startDate ? `<span class="etapa-fechas"><i class="fas fa-calendar-alt"></i> ${etapa.startDate} → ${etapa.endDate || "—"}</span>` : ""}
+                            ${etapa.startDate ? `<span class="etapa-fechas"><i class="fas fa-calendar-alt"></i> ${formatDate(etapa.startDate)} → ${formatDate(etapa.endDate) || "—"}</span>` : ""}
                             <span class="etapa-progress">${etapaProgress}% completado</span>
-                            ${etapaDuration > 0 ? `<span class="etapa-days"><i class="fas fa-hourglass-half"></i> ${etapaDuration} días</span>` : ""}
-                            <span class="${daysRemainingClass}"><i class="fas fa-clock"></i> ${etapaDaysRemaining < 0 ? 0 : etapaDaysRemaining} días rest.</span>
+                            ${etapaDuration > 0 ? `<span class="etapa-days"><i class="fas fa-hourglass-half"></i> ${etapaDuration} dias</span>` : ""}
+                            <span class="${daysRemainingClass}"><i class="fas fa-clock"></i> ${etapaDaysRemaining < 0 ? 0 : etapaDaysRemaining} dias rest.</span>
                         </div>
                         <div class="etapa-header-right">
                             <div class="etapa-actions">
@@ -1822,7 +2935,6 @@
           container.appendChild(etapaDiv);
         });
 
-        // Event listeners
         document.querySelectorAll(".etapa-header").forEach((header) => {
           const etapaId = header.dataset.etapa;
           header.onclick = (e) => {
@@ -1837,7 +2949,6 @@
             localStorage.setItem(`etapa_${etapaId}_collapsed`, collapsed);
           };
         });
-
         document.querySelectorAll(".edit-etapa").forEach((btn) => {
           btn.onclick = (e) => {
             e.stopPropagation();
@@ -1895,6 +3006,7 @@
 
       // ==================== CRUD ====================
       window.openEtapaModal = function (etapaId = null) {
+        const project = getCurrentProject();
         if (etapaId) {
           const etapa = getEtapa(etapaId);
           if (etapa) {
@@ -1917,6 +3029,17 @@
           document.getElementById("etapaDesc").value = "";
           currentEditEtapaId = null;
         }
+
+        let rangeHtml = "";
+        if (project.startDate || project.endDate) {
+          rangeHtml = `<div class="date-range-highlight"><div class="range-info"><i class="fas fa-calendar-alt"></i><strong>Rango del proyecto:</strong>${project.startDate ? `<span>Inicio: ${formatDate(project.startDate)}</span>` : ""}${project.endDate ? `<span>Fin: ${formatDate(project.endDate)}</span>` : ""}</div><div style="font-size:10px; margin-top:4px;"><i class="fas fa-info-circle"></i> Las fechas de la etapa deben estar dentro del rango del proyecto</div></div>`;
+        } else {
+          rangeHtml = `<div class="date-range-highlight" style="background:#e5e7eb; color:#4b5563;"><i class="fas fa-info-circle"></i> Define primero las fechas del proyecto en "Datos"</div>`;
+        }
+        const modalBody = document.querySelector("#etapaModal .modal-body");
+        const existingRange = modalBody.querySelector(".date-range-highlight");
+        if (existingRange) existingRange.remove();
+        modalBody.insertAdjacentHTML("afterbegin", rangeHtml);
         document.getElementById("etapaModal").style.display = "block";
       };
 
@@ -1932,7 +3055,38 @@
 
       window.openTaskModal = function (taskId = null, etapaId) {
         const etapa = getEtapa(etapaId);
+        const project = getCurrentProject();
         document.getElementById("taskEtapaId").value = etapaId;
+
+        let rangeHtml = "";
+        if (etapa.startDate || etapa.endDate) {
+          let warningClass = "";
+          let warningText = "";
+          if (
+            project.startDate &&
+            etapa.startDate &&
+            etapa.startDate < project.startDate
+          ) {
+            warningClass = "date-warning";
+            warningText = "La etapa inicia antes que el proyecto";
+          }
+          if (
+            project.endDate &&
+            etapa.endDate &&
+            etapa.endDate > project.endDate
+          ) {
+            warningClass = "date-warning";
+            warningText = "La etapa termina despues que el proyecto";
+          }
+          rangeHtml = `<div class="date-range-highlight ${warningClass}"><div class="range-info"><i class="fas fa-layer-group"></i><strong>Rango de la etapa:</strong>${etapa.startDate ? `<span>Inicio: ${formatDate(etapa.startDate)}</span>` : ""}${etapa.endDate ? `<span>Fin: ${formatDate(etapa.endDate)}</span>` : ""}</div>${warningText ? `<div style="font-size:10px; margin-top:4px; color:#991b1b;">${warningText}</div>` : ""}<div style="font-size:10px; margin-top:4px;"><i class="fas fa-info-circle"></i> Las fechas de la actividad deben estar dentro del rango de la etapa</div></div>`;
+        } else {
+          rangeHtml = `<div class="date-range-highlight" style="background:#e5e7eb; color:#4b5563;"><i class="fas fa-info-circle"></i> La etapa no tiene fechas definidas. Edita la etapa para definir su rango.</div>`;
+        }
+        const modalBody = document.querySelector("#taskModal .modal-body");
+        const existingRange = modalBody.querySelector(".date-range-highlight");
+        if (existingRange) existingRange.remove();
+        modalBody.insertAdjacentHTML("afterbegin", rangeHtml);
+
         if (taskId) {
           const task = etapa.tasks.find((t) => t.id === taskId);
           if (task) {
@@ -1953,6 +3107,7 @@
               "Editar Actividad";
             currentEditTaskId = task.id;
             renderDependenciesList(etapa, task.dependencies || [], task.id);
+            renderCommentsList(etapaId, task.id);
           }
         } else {
           document.getElementById("taskForm").reset();
@@ -1965,14 +3120,24 @@
           document.getElementById("taskModalTitle").innerHTML =
             "Nueva Actividad";
           currentEditTaskId = null;
-          const today = new Date().toISOString().split("T")[0];
-          const nextWeek = new Date();
-          nextWeek.setDate(new Date().getDate() + 7);
-          document.getElementById("taskStart").value = today;
-          document.getElementById("taskEnd").value = nextWeek
+          let suggestedStart = new Date().toISOString().split("T")[0];
+          let suggestedEnd = new Date(
+            new Date().setDate(new Date().getDate() + 7),
+          )
             .toISOString()
             .split("T")[0];
+          if (etapa.startDate && etapa.startDate > suggestedStart)
+            suggestedStart = etapa.startDate;
+          if (etapa.endDate && etapa.endDate < suggestedEnd)
+            suggestedEnd = etapa.endDate;
+          if (project.startDate && project.startDate > suggestedStart)
+            suggestedStart = project.startDate;
+          if (project.endDate && project.endDate < suggestedEnd)
+            suggestedEnd = project.endDate;
+          document.getElementById("taskStart").value = suggestedStart;
+          document.getElementById("taskEnd").value = suggestedEnd;
           renderDependenciesList(etapa, [], null);
+          renderCommentsList(etapaId, null);
         }
         document.getElementById("taskModal").style.display = "block";
       };
@@ -2023,6 +3188,7 @@
             name: name,
             responsable: responsable || "",
             startDate: today,
+            endDate: "",
             etapas: [],
           });
           currentProjectId = projects[projects.length - 1].id;
@@ -2066,7 +3232,7 @@
         saveData();
         updateProjectInfoDisplay();
         document.getElementById("projectInfoModal").style.display = "none";
-        showToast("Información actualizada", "success");
+        showToast("Informacion actualizada", "success");
       }
 
       function exportCurrentProject() {
@@ -2097,7 +3263,7 @@
               renderAll();
               showToast("Proyecto importado", "success");
             } else {
-              showToast("Formato inválido", "error");
+              showToast("Formato invalido", "error");
             }
           } catch (e) {
             showToast("Error al importar", "error");
@@ -2140,7 +3306,7 @@
               renderAll();
               showToast("Backup restaurado", "success");
             } else {
-              showToast("Formato inválido", "error");
+              showToast("Formato invalido", "error");
             }
           } catch (e) {
             showToast("Error al restaurar", "error");
@@ -2313,21 +3479,371 @@
         container.appendChild(svg);
       }
 
+      // ==================== BUSQUEDA GLOBAL ====================
+      function searchGlobal() {
+        const searchTerm = document
+          .getElementById("globalSearchInput")
+          .value.toLowerCase()
+          .trim();
+        const filter = document.getElementById("searchFilter").value;
+        currentSearchTerm = searchTerm;
+        currentSearchFilter = filter;
+
+        const project = getCurrentProject();
+        const results = [];
+
+        if (!searchTerm) {
+          document.getElementById("searchResultsCount").innerHTML = "";
+          renderAll();
+          return;
+        }
+
+        project.etapas.forEach((etapa) => {
+          if (!etapa.tasks) return;
+          etapa.tasks.forEach((task) => {
+            let match = false;
+            if (filter === "all" || filter === "task") {
+              if (task.name.toLowerCase().includes(searchTerm)) match = true;
+            }
+            if (!match && (filter === "all" || filter === "responsable")) {
+              if (
+                task.responsable &&
+                task.responsable.toLowerCase().includes(searchTerm)
+              )
+                match = true;
+            }
+            if (!match && (filter === "all" || filter === "comment")) {
+              if (task.comments) {
+                if (
+                  task.comments.some((c) =>
+                    c.text.toLowerCase().includes(searchTerm),
+                  )
+                )
+                  match = true;
+              }
+            }
+            if (match) results.push({ etapa: etapa.name, task: task });
+          });
+        });
+
+        document.getElementById("searchResultsCount").innerHTML =
+          `🔍 ${results.length} resultado(s) encontrado(s) para "${searchTerm}"`;
+
+        const matchedTaskIds = new Set(results.map((r) => r.task.id));
+        const container = document.getElementById("etapasContainer");
+        if (!project.etapas || project.etapas.length === 0) return;
+
+        container.innerHTML = "";
+        project.etapas.forEach((etapa) => {
+          const hasMatches = etapa.tasks?.some((t) => matchedTaskIds.has(t.id));
+          const isCollapsed = !hasMatches;
+          const etapaProgress = calculateEtapaProgress(etapa);
+          const etapaDuration = calculateDaysBetween(
+            etapa.startDate,
+            etapa.endDate,
+          );
+          const etapaDaysRemaining = calculateDaysRemaining(
+            etapa.endDate,
+            etapaProgress,
+          );
+          const daysRemainingClass =
+            etapaDaysRemaining <= 3 ? "etapa-days-remaining" : "etapa-days";
+
+          const etapaDiv = document.createElement("div");
+          etapaDiv.className = "etapa-container";
+          etapaDiv.innerHTML = `
+                    <div class="etapa-header ${isCollapsed ? "collapsed" : ""}" data-etapa="${etapa.id}">
+                        <div class="etapa-header-left">
+                            <i class="fas fa-chevron-down"></i>
+                            <span class="etapa-titulo">${escapeHtml(etapa.name)} ${hasMatches ? '<span style="background:#fef08a; font-size:10px; padding:2px 6px; border-radius:12px;">🔍</span>' : ""}</span>
+                            ${etapa.startDate ? `<span class="etapa-fechas"><i class="fas fa-calendar-alt"></i> ${formatDate(etapa.startDate)} → ${formatDate(etapa.endDate) || "—"}</span>` : ""}
+                            <span class="etapa-progress">${etapaProgress}% completado</span>
+                            ${etapaDuration > 0 ? `<span class="etapa-days"><i class="fas fa-hourglass-half"></i> ${etapaDuration} dias</span>` : ""}
+                            <span class="${daysRemainingClass}"><i class="fas fa-clock"></i> ${etapaDaysRemaining < 0 ? 0 : etapaDaysRemaining} dias rest.</span>
+                        </div>
+                        <div class="etapa-header-right">
+                            <div class="etapa-actions">
+                                <button class="edit-etapa" data-id="${etapa.id}"><i class="fas fa-edit"></i> Editar</button>
+                                <button class="delete-etapa" data-id="${etapa.id}"><i class="fas fa-trash"></i> Eliminar</button>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="etapa-content ${isCollapsed ? "collapsed" : ""}">
+                        <div class="etapa-content-inner">
+                            <div class="etapa-actions-bar">
+                                <button class="btn-primary add-task" data-etapa="${etapa.id}"><i class="fas fa-plus"></i> Nueva Actividad</button>
+                                <button class="btn-primary add-note" data-etapa="${etapa.id}"><i class="fas fa-sticky-note"></i> Nueva Nota</button>
+                            </div>
+                            <h4>Actividades</h4>
+                            ${renderTasksTableWithHighlight(etapa, matchedTaskIds, searchTerm)}
+                            <h4>Notas</h4>
+                            ${renderNotesTable(etapa)}
+                        </div>
+                    </div>
+                `;
+          container.appendChild(etapaDiv);
+        });
+
+        document.querySelectorAll(".etapa-header").forEach((header) => {
+          const etapaId = header.dataset.etapa;
+          header.onclick = (e) => {
+            if (
+              e.target.closest(".edit-etapa") ||
+              e.target.closest(".delete-etapa")
+            )
+              return;
+            const content = header.nextElementSibling;
+            const collapsed = content.classList.toggle("collapsed");
+            header.classList.toggle("collapsed");
+            localStorage.setItem(`etapa_${etapaId}_collapsed`, collapsed);
+          };
+        });
+        document.querySelectorAll(".edit-etapa").forEach((btn) => {
+          btn.onclick = (e) => {
+            e.stopPropagation();
+            openEtapaModal(btn.dataset.id);
+          };
+        });
+        document.querySelectorAll(".delete-etapa").forEach((btn) => {
+          btn.onclick = (e) => {
+            e.stopPropagation();
+            deleteEtapa(btn.dataset.id);
+          };
+        });
+        document.querySelectorAll(".add-task").forEach((btn) => {
+          btn.onclick = (e) => {
+            e.stopPropagation();
+            openTaskModal(null, btn.dataset.etapa);
+          };
+        });
+        document.querySelectorAll(".add-note").forEach((btn) => {
+          btn.onclick = (e) => {
+            e.stopPropagation();
+            openNoteModal(btn.dataset.etapa);
+          };
+        });
+      }
+
+      function renderTasksTableWithHighlight(
+        etapa,
+        matchedTaskIds,
+        searchTerm,
+      ) {
+        if (!etapa.tasks || etapa.tasks.length === 0)
+          return '<div style="padding:20px; text-align:center; color:#999;">No hay actividades</div>';
+        const sortedTasks = sortTasksByPriority(etapa.tasks);
+        let html = `<div class="tasks-table">能<thead><tr><th>Actividad</th><th>Responsable</th><th>Prioridad</th><th>Dias rest.</th><th>Inicio</th><th>Fin</th><th>Progreso</th><th>Comentarios</th><th>Acciones</th></tr></thead><tbody>`;
+        sortedTasks.forEach((task) => {
+          const isHighlighted = matchedTaskIds.has(task.id);
+          const days = calculateDaysRemaining(task.end, task.progress);
+          const countdownClass = getCountdownClass(days, task.progress);
+          const countdownText = getCountdownText(days, task.progress);
+          const priorityClass =
+            task.priority === "Alta"
+              ? "high"
+              : task.priority === "Media"
+                ? "medium"
+                : "low";
+          const priorityText =
+            task.priority === "Alta"
+              ? "Alta"
+              : task.priority === "Media"
+                ? "Media"
+                : "Baja";
+
+          let taskNameDisplay = escapeHtml(task.name);
+          if (isHighlighted && searchTerm) {
+            const regex = new RegExp(`(${searchTerm})`, "gi");
+            taskNameDisplay = taskNameDisplay.replace(
+              regex,
+              '<mark style="background:#fef08a; padding:0 2px; border-radius:3px;">$1</mark>',
+            );
+          }
+
+          let commentsHtml = "";
+          if (task.comments && task.comments.length > 0) {
+            commentsHtml =
+              '<ul style="margin:0; padding-left:16px; font-size:11px;">';
+            task.comments.forEach((comment) => {
+              commentsHtml += `<li style="margin-bottom:3px;">${escapeHtml(comment.text)}</li>`;
+            });
+            commentsHtml += "</ul>";
+          } else {
+            commentsHtml = '<span style="color:#999; font-size:11px;">—</span>';
+          }
+
+          html += `<tr class="${isHighlighted ? "priority-high" : ""}" ${isHighlighted ? 'style="background:#fefce8 !important;"' : ""}>
+                    <td>${taskNameDisplay}</td>
+                    <td>${task.responsable ? escapeHtml(task.responsable) : "-"}</td>
+                    <td><span class="priority-badge ${priorityClass}">${priorityText}</span></td>
+                    <td><span class="countdown-badge ${countdownClass}">${countdownText}</span></td>
+                    <td>${formatDate(task.start)}</td>
+                    <td>${formatDate(task.end)}</td>
+                    <td><progress value="${task.progress}" max="100"></progress> ${task.progress}%</td>
+                    <td>${commentsHtml}</td>
+                    <td class="action-buttons">
+                        <button class="btn-primary edit-task" data-id="${task.id}" data-etapa="${etapa.id}"><i class="fas fa-edit"></i></button>
+                        <button class="btn-info comments-task" data-id="${task.id}" data-etapa="${etapa.id}" style="background:#8b5cf6;"><i class="fas fa-comments"></i></button>
+                        <button class="btn-danger delete-task" data-id="${task.id}" data-etapa="${etapa.id}"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>`;
+        });
+        html += `</tbody>}</div>`;
+        return html;
+      }
+
+      function generateSearchReport() {
+        const searchTerm = document
+          .getElementById("globalSearchInput")
+          .value.toLowerCase()
+          .trim();
+        const filter = document.getElementById("searchFilter").value;
+        const project = getCurrentProject();
+        const results = [];
+
+        if (!searchTerm) {
+          showToast("Ingrese un termino de busqueda", "error");
+          return;
+        }
+
+        project.etapas.forEach((etapa) => {
+          if (!etapa.tasks) return;
+          etapa.tasks.forEach((task) => {
+            let match = false;
+            let matchType = "";
+            let matchDetails = "";
+            if (filter === "all" || filter === "task") {
+              if (task.name.toLowerCase().includes(searchTerm)) {
+                match = true;
+                matchType = "Actividad";
+                matchDetails = task.name;
+              }
+            }
+            if (!match && (filter === "all" || filter === "responsable")) {
+              if (
+                task.responsable &&
+                task.responsable.toLowerCase().includes(searchTerm)
+              ) {
+                match = true;
+                matchType = "Responsable";
+                matchDetails = task.responsable;
+              }
+            }
+            if (!match && (filter === "all" || filter === "comment")) {
+              if (task.comments) {
+                const matchingComment = task.comments.find((c) =>
+                  c.text.toLowerCase().includes(searchTerm),
+                );
+                if (matchingComment) {
+                  match = true;
+                  matchType = "Comentario";
+                  matchDetails = matchingComment.text.substring(0, 80);
+                }
+              }
+            }
+            if (match)
+              results.push({
+                etapa: etapa.name,
+                task: task,
+                matchType: matchType,
+                matchDetails: matchDetails,
+              });
+          });
+        });
+
+        if (results.length === 0) {
+          showToast(
+            `No se encontraron resultados para "${searchTerm}"`,
+            "info",
+          );
+          return;
+        }
+
+        const reportHtml = `<!DOCTYPE html>
+            <html><head><meta charset="UTF-8"><title>Reporte de Busqueda - ${escapeHtml(project.name)}</title>
+            <style>
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body { font-family: 'Segoe UI', Arial, sans-serif; padding: 30px; background: #f3f4f6; }
+                .report { max-width: 1000px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden; }
+                .header { background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; padding: 25px; text-align: center; }
+                .header h1 { font-size: 24px; margin-bottom: 8px; }
+                .search-info { background: #fefce8; padding: 15px 25px; border-bottom: 1px solid #e5e7eb; display: flex; gap: 20px; flex-wrap: wrap; }
+                .results-count { background: #4f46e5; color: white; padding: 10px 25px; font-weight: bold; }
+                .result-card { padding: 20px 25px; border-bottom: 1px solid #e5e7eb; }
+                .result-header { display: flex; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
+                .etapa-name { font-size: 14px; color: #6b7280; }
+                .match-badge { background: #e0e7ff; color: #4f46e5; padding: 4px 12px; border-radius: 20px; font-size: 11px; }
+                .task-name { font-size: 18px; font-weight: bold; color: #1e1b4b; margin-bottom: 12px; }
+                .task-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; background: #f9fafb; padding: 12px; border-radius: 12px; margin: 12px 0; }
+                .detail-item { font-size: 13px; }
+                .detail-label { font-weight: bold; color: #4b5563; }
+                .progress-bar { width: 100%; height: 8px; background: #e5e7eb; border-radius: 10px; overflow: hidden; margin-top: 5px; }
+                .progress-fill { height: 100%; border-radius: 10px; }
+                .comments-section { margin-top: 15px; padding-top: 12px; border-top: 1px dashed #e5e7eb; }
+                .comments-title { font-size: 12px; font-weight: bold; color: #4b5563; margin-bottom: 8px; }
+                .comment { background: #fefce8; padding: 8px 12px; border-radius: 8px; margin-bottom: 6px; font-size: 12px; }
+                .footer { text-align: center; padding: 15px; font-size: 10px; color: #9ca3af; border-top: 1px solid #e5e7eb; }
+                @media print { body { padding: 0; background: white; } .report { box-shadow: none; } }
+            </style></head>
+            <body><div class="report">
+                <div class="header"><h1>${escapeHtml(project.name)}</h1><p>Reporte de Busqueda</p></div>
+                <div class="search-info"><span>🔍 Termino buscado: <strong>${escapeHtml(searchTerm)}</strong></span><span>📋 Filtro: <strong>${filter === "all" ? "Todos" : filter === "task" ? "Actividades" : filter === "responsable" ? "Por responsable" : "Comentarios"}</strong></span><span>📅 Generado: ${new Date().toLocaleString()}</span></div>
+                <div class="results-count">📊 ${results.length} resultado(s) encontrado(s)</div>
+                ${results
+                  .map((r) => {
+                    const progress = r.task.progress || 0;
+                    let progressColor = "#ef4444";
+                    if (progress >= 80) progressColor = "#22c55e";
+                    else if (progress >= 50) progressColor = "#eab308";
+                    return `<div class="result-card">
+                        <div class="result-header"><span class="etapa-name">📁 ${escapeHtml(r.etapa)}</span><span class="match-badge">${r.matchType}: ${escapeHtml(r.matchDetails.substring(0, 40))}${r.matchDetails.length > 40 ? "..." : ""}</span></div>
+                        <div class="task-name">${escapeHtml(r.task.name)}</div>
+                        <div class="task-details">
+                            <div class="detail-item"><span class="detail-label">Responsable:</span> ${escapeHtml(r.task.responsable) || "No asignado"}</div>
+                            <div class="detail-item"><span class="detail-label">Prioridad:</span> ${r.task.priority || "Media"}</div>
+                            <div class="detail-item"><span class="detail-label">Fechas:</span> ${formatDate(r.task.start) || "N/E"} → ${formatDate(r.task.end) || "N/E"}</div>
+                            <div class="detail-item"><span class="detail-label">Progreso:</span> ${progress}%<div class="progress-bar"><div class="progress-fill" style="width: ${progress}%; background: ${progressColor};"></div></div></div>
+                        </div>
+                        ${r.task.comments && r.task.comments.length > 0 ? `<div class="comments-section"><div class="comments-title">💬 Comentarios (${r.task.comments.length})</div>${r.task.comments.map((c) => `<div class="comment">${escapeHtml(c.text)}<br><small>${c.date}</small></div>`).join("")}</div>` : '<div class="comments-section"><div class="comments-title">💬 Sin comentarios</div></div>'}
+                    </div>`;
+                  })
+                  .join("")}
+                <div class="footer">Reporte generado por Gestor Profesional de Proyectos</div>
+            </div><script>setTimeout(() => window.print(), 300);<\/script></body></html>`;
+
+        const printWindow = window.open(
+          "",
+          "_blank",
+          "width=1000,height=700,toolbar=yes,scrollbars=yes,menubar=yes",
+        );
+        if (printWindow) {
+          printWindow.document.write(reportHtml);
+          printWindow.document.close();
+          printWindow.focus();
+        } else {
+          showToast("Permite ventanas emergentes para ver el reporte", "error");
+        }
+      }
+
+      function clearSearch() {
+        document.getElementById("globalSearchInput").value = "";
+        document.getElementById("searchFilter").value = "all";
+        document.getElementById("searchResultsCount").innerHTML = "";
+        renderAll();
+      }
+
       // ==================== EXPORTAR PDF ====================
       async function exportToPDF() {
         const project = getCurrentProject();
-
         if (!project.etapas?.some((e) => e.tasks?.length)) {
           showToast("No hay actividades para exportar", "error");
           return;
         }
+        showToast("Abriendo vista de impresion...", "info");
 
-        showToast("Abriendo vista de impresión...", "info");
-
-        // Capturar el diagrama Gantt como imagen
         let ganttImageSrc = "";
         const ganttElement = document.getElementById("ganttChart");
-
         if (ganttElement && project.etapas?.some((e) => e.tasks?.length)) {
           try {
             const canvas = await html2canvas(ganttElement, {
@@ -2342,7 +3858,6 @@
           }
         }
 
-        // Función para limpiar texto
         function cleanText(text) {
           if (!text) return "";
           return text
@@ -2353,19 +3868,8 @@
             .trim();
         }
 
-        // Función para calcular progreso de etapa
-        function calculateEtapaProgress(etapa) {
-          if (!etapa.tasks || etapa.tasks.length === 0) return 0;
-          const total = etapa.tasks.reduce(
-            (sum, t) => sum + (t.progress || 0),
-            0,
-          );
-          return Math.round(total / etapa.tasks.length);
-        }
-
-        // Calcular progreso global
-        let totalProgress = 0;
-        let totalTasks = 0;
+        let totalProgress = 0,
+          totalTasks = 0;
         project.etapas.forEach((etapa) => {
           if (etapa.tasks && etapa.tasks.length) {
             totalTasks += etapa.tasks.length;
@@ -2378,511 +3882,131 @@
         const globalProgress =
           totalTasks === 0 ? 0 : Math.round(totalProgress / totalTasks);
 
-        // Construir HTML para impresión
         const printHtml = `<!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>${cleanText(project.name)} - Reporte de Proyecto</title>
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-            
-            body {
-                font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-                background: white;
-                padding: 20px;
-                color: #1a1a2e;
-            }
-            
-            .report-container {
-                max-width: 1200px;
-                margin: 0 auto;
-                background: white;
-            }
-            
-            /* Encabezado */
-            .header {
-                text-align: center;
-                margin-bottom: 30px;
-                padding-bottom: 20px;
-                border-bottom: 2px solid #4f46e5;
-            }
-            
-            .header h1 {
-                font-size: 28px;
-                color: #1e1b4b;
-                margin-bottom: 10px;
-            }
-            
-            .header .subtitle {
-                color: #6b7280;
-                font-size: 12px;
-            }
-            
-            /* Tarjeta de información */
-            .info-card {
-                background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-                color: white;
-                padding: 20px;
-                border-radius: 12px;
-                margin-bottom: 25px;
-                display: flex;
-                justify-content: space-between;
-                flex-wrap: wrap;
-                gap: 15px;
-            }
-            
-            .info-item {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                font-size: 13px;
-                background: rgba(255,255,255,0.15);
-                padding: 6px 14px;
-                border-radius: 20px;
-            }
-            
-            .progress-bar-container {
-                background: rgba(255,255,255,0.2);
-                padding: 6px 14px;
-                border-radius: 20px;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-            
-            .progress-bar {
-                width: 120px;
-                height: 8px;
-                background: rgba(255,255,255,0.3);
-                border-radius: 10px;
-                overflow: hidden;
-            }
-            
-            .progress-fill {
-                height: 100%;
-                background: linear-gradient(90deg, #22c55e, #16a34a);
-                border-radius: 10px;
-                width: ${globalProgress}%;
-            }
-            
-            /* Títulos de sección */
-            .section-title {
-                font-size: 20px;
-                font-weight: bold;
-                color: #1e1b4b;
-                margin: 25px 0 15px 0;
-                padding-left: 10px;
-                border-left: 4px solid #4f46e5;
-            }
-            
-            /* Tarjeta de etapa */
-            .etapa-card {
-                margin-bottom: 25px;
-                border: 1px solid #e5e7eb;
-                border-radius: 12px;
-                overflow: hidden;
-                break-inside: avoid;
-                page-break-inside: avoid;
-            }
-            
-            .etapa-header {
-                background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-                padding: 12px 16px;
-                border-bottom: 2px solid #4f46e5;
-            }
-            
-            .etapa-header h3 {
-                font-size: 16px;
-                font-weight: bold;
-                color: #1e1b4b;
-                margin-bottom: 6px;
-            }
-            
-            .etapa-fechas {
-                font-size: 11px;
-                color: #6b7280;
-                display: flex;
-                gap: 15px;
-                flex-wrap: wrap;
-            }
-            
-            .etapa-progress {
-                margin-top: 8px;
-                font-size: 12px;
-            }
-            
-            .etapa-progress span {
-                display: block;
-                margin-bottom: 5px;
-            }
-            
-            /* Tabla de progreso para etapa */
-            .progress-table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 5px;
-            }
-            
-            .progress-table td {
-                padding: 4px 0;
-                border: none;
-            }
-            
-            /* Tabla de actividades */
-            .tasks-table {
-                width: 100%;
-                border-collapse: collapse;
-                font-size: 12px;
-            }
-            
-            .tasks-table th {
-                background: #4f46e5;
-                color: white;
-                padding: 10px 8px;
-                text-align: left;
-                font-weight: 600;
-                font-size: 11px;
-            }
-            
-            .tasks-table td {
-                padding: 10px 8px;
-                border-bottom: 1px solid #e5e7eb;
-                vertical-align: middle;
-            }
-            
-            .tasks-table tr:last-child td {
-                border-bottom: none;
-            }
-            
-            .tasks-table tr:nth-child(even) {
-                background-color: #f9fafb;
-            }
-            
-            /* Tabla de progreso para actividades */
-            .progress-cell-table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-            
-            .progress-cell-table td {
-                padding: 4px 0;
-                border: none;
-            }
-            
-            .progress-percent {
-                text-align: right;
-                font-size: 10px;
-                margin-top: 3px;
-                font-weight: 500;
-            }
-            
-            /* Notas de etapa */
-            .etapa-notes {
-                background: #fefce8;
-                padding: 12px 16px;
-                border-top: 1px solid #fde047;
-            }
-            
-            .notes-title {
-                font-size: 11px;
-                font-weight: bold;
-                color: #854d0e;
-                margin-bottom: 8px;
-                display: flex;
-                align-items: center;
-                gap: 6px;
-            }
-            
-            .notes-list {
-                list-style: none;
-                padding-left: 0;
-            }
-            
-            .notes-list li {
-                font-size: 11px;
-                color: #422006;
-                padding: 4px 0;
-                padding-left: 16px;
-                position: relative;
-            }
-            
-            .notes-list li:before {
-                content: "•";
-                position: absolute;
-                left: 4px;
-                color: #eab308;
-            }
-            
-            .sin-notas {
-                font-size: 11px;
-                color: #9ca3af;
-                font-style: italic;
-                padding: 4px 0;
-                padding-left: 16px;
-            }
-            
-            /* Gantt */
-            .gantt-section {
-                margin-top: 25px;
-                page-break-before: avoid;
-            }
-            
-            .gantt-image {
-                border: 1px solid #e5e7eb;
-                border-radius: 8px;
-                overflow-x: auto;
-                background: white;
-            }
-            
-            .gantt-image img {
-                width: 100%;
-                height: auto;
-            }
-            
-            /* Pie de página */
-            .footer {
-                margin-top: 40px;
-                padding-top: 15px;
-                text-align: center;
-                font-size: 9px;
-                color: #9ca3af;
-                border-top: 1px solid #e5e7eb;
-            }
-            
-            /* Forzar colores en impresión */
-            @media print {
-                body {
-                    padding: 0;
-                    margin: 0;
-                }
-                .report-container {
-                    max-width: 100%;
-                    padding: 10px;
-                }
-                .info-card {
-                    break-inside: avoid;
-                }
-                .etapa-card {
-                    break-inside: avoid;
-                    page-break-inside: avoid;
-                }
-                .gantt-section {
-                    break-before: page;
-                }
-                .progress-table td,
-                .progress-cell-table td,
-                .tasks-table th {
-                    -webkit-print-color-adjust: exact;
-                    print-color-adjust: exact;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="report-container">
-            <!-- Encabezado -->
-            <div class="header">
-                <h1>${cleanText(project.name) || "Informe de Proyecto"}</h1>
-                <div class="subtitle">Reporte generado el ${new Date().toLocaleString("es-ES")}</div>
-            </div>
-            
-            <!-- Tarjeta de información -->
-            <div class="info-card">
-                <div class="info-item">
-                    Responsable: ${cleanText(project.responsable) || "No asignado"}
-                </div>
-                <div class="info-item">
-                    Periodo: ${project.startDate || "N/E"} - ${project.endDate || "N/E"}
-                </div>
-                <div class="progress-bar-container">
-                    Progreso global: ${globalProgress}%
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Estructura del Proyecto por Etapas -->
-            <div class="section-title">Estructura del Proyecto</div>
-            
-            ${project.etapas
-              .map((etapa) => {
-                const etapaName = cleanText(etapa.name) || "Sin nombre";
-                const etapaStart = etapa.startDate || "No definida";
-                const etapaEnd = etapa.endDate || "No definida";
-                const etapaProgress = calculateEtapaProgress(etapa);
-                const hasTasks = etapa.tasks && etapa.tasks.length;
-                const hasNotes = etapa.notes && etapa.notes.length;
+            <html lang="es"><head><meta charset="UTF-8"><title>${cleanText(project.name)} - Reporte de Proyecto</title>
+            <style>
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body { font-family: 'Segoe UI', Arial, sans-serif; background: white; padding: 20px; color: #1a1a2e; }
+                .report-container { max-width: 1200px; margin: 0 auto; background: white; }
+                .header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #4f46e5; }
+                .header h1 { font-size: 28px; color: #1e1b4b; margin-bottom: 10px; }
+                .info-card { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; padding: 20px; border-radius: 12px; margin-bottom: 25px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px; }
+                .info-item { display: flex; align-items: center; gap: 8px; font-size: 13px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 20px; }
+                .progress-bar-container { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; display: flex; align-items: center; gap: 10px; }
+                .progress-bar { width: 120px; height: 8px; background: rgba(255,255,255,0.3); border-radius: 10px; overflow: hidden; }
+                .progress-fill { height: 100%; background: linear-gradient(90deg, #22c55e, #16a34a); border-radius: 10px; width: ${globalProgress}%; }
+                .section-title { font-size: 20px; font-weight: bold; color: #1e1b4b; margin: 25px 0 15px 0; padding-left: 10px; border-left: 4px solid #4f46e5; }
+                .etapa-card { margin-bottom: 25px; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; break-inside: avoid; }
+                .etapa-header { background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); padding: 12px 16px; border-bottom: 2px solid #4f46e5; }
+                .etapa-header h3 { font-size: 16px; font-weight: bold; color: #1e1b4b; margin-bottom: 6px; }
+                .etapa-fechas { font-size: 11px; color: #6b7280; display: flex; gap: 15px; flex-wrap: wrap; }
+                .etapa-progress { margin-top: 8px; font-size: 12px; }
+                .progress-table { width: 100%; border-collapse: collapse; margin-top: 5px; }
+                .progress-table td { padding: 4px 0; border: none; }
+                .tasks-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+                .tasks-table th { background: #4f46e5; color: white; padding: 10px 8px; text-align: left; font-weight: 600; font-size: 10px; }
+                .tasks-table td { padding: 10px 8px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+                .tasks-table tr:nth-child(even) { background-color: #f9fafb; }
+                .progress-cell-table { width: 100%; border-collapse: collapse; }
+                .progress-cell-table td { padding: 3px 0; border: none; }
+                .priority-badge-pdf { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 9px; font-weight: 600; }
+                .priority-high-pdf { background: #fee2e2; color: #dc2626; }
+                .priority-medium-pdf { background: #fef3c7; color: #d97706; }
+                .priority-low-pdf { background: #dcfce7; color: #16a34a; }
+                .comments-list-pdf { margin: 0; padding-left: 16px; font-size: 9px; color: #4b5563; }
+                .comments-list-pdf li { margin-bottom: 3px; }
+                .etapa-notes { background: #fefce8; padding: 12px 16px; border-top: 1px solid #fde047; }
+                .notes-list { list-style: none; padding-left: 0; }
+                .notes-list li { font-size: 11px; color: #422006; padding: 4px 0; padding-left: 16px; position: relative; }
+                .notes-list li:before { content: "•"; position: absolute; left: 4px; color: #eab308; }
+                .gantt-section { margin-top: 25px; page-break-before: avoid; }
+                .gantt-image { border: 1px solid #e5e7eb; border-radius: 8px; overflow-x: auto; background: white; }
+                .gantt-image img { width: 100%; height: auto; }
+                .footer { margin-top: 40px; padding-top: 15px; text-align: center; font-size: 9px; color: #9ca3af; border-top: 1px solid #e5e7eb; }
+                @media print { body { padding: 0; margin: 0; } .info-card { break-inside: avoid; } .etapa-card { break-inside: avoid; } .gantt-section { break-before: page; } .progress-table td, .progress-cell-table td, .tasks-table th { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+            </style></head>
+            <body><div class="report-container">
+                <div class="header"><h1>${cleanText(project.name) || "Informe de Proyecto"}</h1><div class="subtitle">Reporte generado el ${new Date().toLocaleString("es-ES")}</div></div>
+                <div class="info-card"><div class="info-item">Responsable: ${cleanText(project.responsable) || "No asignado"}</div><div class="info-item">Periodo: ${formatDate(project.startDate) || "N/E"} - ${formatDate(project.endDate) || "N/E"}</div><div class="progress-bar-container">Progreso global: ${globalProgress}%<div class="progress-bar"><div class="progress-fill"></div></div></div></div>
+                <div class="section-title">Estructura del Proyecto</div>
+                ${project.etapas
+                  .map((etapa) => {
+                    const etapaName = cleanText(etapa.name) || "Sin nombre";
+                    const etapaStart =
+                      formatDate(etapa.startDate) || "No definida";
+                    const etapaEnd = formatDate(etapa.endDate) || "No definida";
+                    const etapaProgress = calculateEtapaProgress(etapa);
+                    let progressColor =
+                      etapaProgress >= 80
+                        ? "#22c55e"
+                        : etapaProgress >= 50
+                          ? "#eab308"
+                          : "#ef4444";
+                    let tasksHtml = "";
+                    if (etapa.tasks && etapa.tasks.length) {
+                      tasksHtml = `<table class="tasks-table"><thead><tr><th style="width:25%">Actividad</th><th style="width:12%">Responsable</th><th style="width:10%">Prioridad</th><th style="width:10%">Inicio</th><th style="width:10%">Fin</th><th style="width:18%">Progreso</th><th style="width:15%">Comentarios</th></tr></thead><tbody>${etapa.tasks
+                        .map((task) => {
+                          let priorityBadge = "";
+                          if (task.priority === "Alta")
+                            priorityBadge =
+                              '<span class="priority-badge-pdf priority-high-pdf">Alta</span>';
+                          else if (task.priority === "Media")
+                            priorityBadge =
+                              '<span class="priority-badge-pdf priority-medium-pdf">Media</span>';
+                          else
+                            priorityBadge =
+                              '<span class="priority-badge-pdf priority-low-pdf">Baja</span>';
+                          let commentsHtml = "";
+                          if (task.comments && task.comments.length > 0) {
+                            commentsHtml =
+                              '<ul class="comments-list-pdf">' +
+                              task.comments
+                                .map((c) => `<li>${cleanText(c.text)}</li>`)
+                                .join("") +
+                              "</ul>";
+                          } else {
+                            commentsHtml =
+                              '<span style="color:#9ca3af; font-size:9px;">—</span>';
+                          }
+                          let taskProgressColor =
+                            task.progress >= 80
+                              ? "#22c55e"
+                              : task.progress >= 50
+                                ? "#eab308"
+                                : "#ef4444";
+                          return `<tr><td>${cleanText(task.name)}</td><td>${cleanText(task.responsable) || "No asignado"}</td><td>${priorityBadge}</td><td>${formatDate(task.start) || "N/E"}</td><td>${formatDate(task.end) || "N/E"}</td><td><div style="display:flex; align-items:center; gap:6px;"><div style="flex:1;"><table class="progress-cell-table"><tr><td style="width:${task.progress}%; background:${taskProgressColor};"></td><td style="width:${100 - task.progress}%; background:#e5e7eb;"></td></tr></table></div><span>${task.progress}%</span></div></td><td>${commentsHtml}</td></tr>`;
+                        })
+                        .join("")}</tbody></table>`;
+                    } else {
+                      tasksHtml =
+                        '<div style="padding:20px; text-align:center; color:#9ca3af;">No hay actividades registradas</div>';
+                    }
+                    let notesHtml = "";
+                    if (etapa.notes && etapa.notes.length) {
+                      notesHtml = `<div class="etapa-notes"><div class="notes-title">Notas de la etapa</div><ul class="notes-list">${etapa.notes.map((note) => `<li>${cleanText(note.text)}</li>`).join("")}</ul></div>`;
+                    } else {
+                      notesHtml = `<div class="etapa-notes"><div class="notes-title">Notas de la etapa</div><div style="font-size:11px; color:#9ca3af;">Sin notas registradas</div></div>`;
+                    }
+                    return `<div class="etapa-card"><div class="etapa-header"><h3>${etapaName}</h3><div class="etapa-fechas"><span>Inicio: ${etapaStart}</span><span>Fin: ${etapaEnd}</span></div><div class="etapa-progress"><span>Progreso de etapa: ${etapaProgress}%</span><table class="progress-table"><tr><td style="width:${etapaProgress}%; background:${progressColor};"></td><td style="width:${100 - etapaProgress}%; background:#d1d5db;"></td></tr></table></div></div>${tasksHtml}${notesHtml}</div>`;
+                  })
+                  .join("")}
+                ${ganttImageSrc ? `<div class="gantt-section"><div class="section-title">Diagrama de Gantt</div><div class="gantt-image"><img src="${ganttImageSrc}" alt="Diagrama de Gantt"></div></div>` : ""}
+                <div class="footer">Informe generado por Gestor Profesional de Proyectos</div>
+            </div></body></html>`;
 
-                let progressColor = "";
-                if (etapaProgress >= 80) progressColor = "#22c55e";
-                else if (etapaProgress >= 50) progressColor = "#eab308";
-                else progressColor = "#ef4444";
-
-                let tasksHtml = "";
-                if (hasTasks) {
-                  tasksHtml = `
-                        <table class="tasks-table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 40%">Actividad</th>
-                                    <th style="width: 20%">Responsable</th>
-                                    <th style="width: 15%">Inicio</th>
-                                    <th style="width: 15%">Fin</th>
-                                    <th style="width: 30%">Progreso</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${etapa.tasks
-                                  .map((task) => {
-                                    const taskName =
-                                      cleanText(task.name) || "Sin nombre";
-                                    const responsable =
-                                      cleanText(task.responsable) ||
-                                      "No asignado";
-                                    const startDate = task.start || "N/E";
-                                    const endDate = task.end || "N/E";
-                                    const progress = task.progress || 0;
-
-                                    let taskProgressColor = "";
-                                    if (progress >= 80)
-                                      taskProgressColor = "#22c55e";
-                                    else if (progress >= 50)
-                                      taskProgressColor = "#eab308";
-                                    else taskProgressColor = "#ef4444";
-
-                                    return `
-                                        <tr>
-                                            <td style="width: 40%">${taskName}</td>
-                                            <td style="width: 20%">${responsable}</td>
-                                            <td style="width: 15%">${startDate}</td>
-                                            <td style="width: 15%">${endDate}</td>
-                                            <td style="width: 30%">
-                                                <table class="progress-cell-table">
-                                                    <tr>
-                                                        <td style="width: ${progress}%; background: ${taskProgressColor};"></td>
-                                                        <td style="width: ${100 - progress}%; background: #e5e7eb;"></td>
-                                                    </tr>
-                                                </table>
-                                                <div class="progress-percent">${progress}%</div>
-                                            </td>
-                                         </tr>
-                                    `;
-                                  })
-                                  .join("")}
-                            </tbody>
-                        </table>
-                    `;
-                } else {
-                  tasksHtml = `
-                        <div style="padding: 20px; text-align: center; color: #9ca3af; font-size: 12px;">
-                            No hay actividades registradas en esta etapa
-                        </div>
-                    `;
-                }
-
-                let notesHtml = "";
-                if (hasNotes) {
-                  notesHtml = `
-                        <div class="etapa-notes">
-                            <div class="notes-title">
-                                Notas de la etapa
-                            </div>
-                            <ul class="notes-list">
-                                ${etapa.notes
-                                  .map(
-                                    (note) => `
-                                    <li>${cleanText(note.text) || "Nota vacia"}</li>
-                                `,
-                                  )
-                                  .join("")}
-                            </ul>
-                        </div>
-                    `;
-                } else {
-                  notesHtml = `
-                        <div class="etapa-notes">
-                            <div class="notes-title">
-                                Notas de la etapa
-                            </div>
-                            <div class="sin-notas">Sin notas registradas</div>
-                        </div>
-                    `;
-                }
-
-                return `
-                    <div class="etapa-card">
-                        <div class="etapa-header">
-                            <h3>${etapaName}</h3>
-                            <div class="etapa-fechas">
-                                <span>Inicio: ${etapaStart}</span>
-                                <span>Fin: ${etapaEnd}</span>
-                            </div>
-                            <div class="etapa-progress">
-                                <span>Progreso de etapa: ${etapaProgress}%</span>
-                                <table class="progress-table">
-                                    <tr>
-                                        <td style="width: ${etapaProgress}%; background: ${progressColor};"></td>
-                                        <td style="width: ${100 - etapaProgress}%; background: #d1d5db;"></td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        ${tasksHtml}
-                        ${notesHtml}
-                    </div>
-                `;
-              })
-              .join("")}
-            
-            <!-- Diagrama de Gantt -->
-            ${
-              ganttImageSrc
-                ? `
-            <div class="gantt-section">
-                <div class="section-title">Diagrama de Gantt</div>
-                <div class="gantt-image">
-                    <img src="${ganttImageSrc}" alt="Diagrama de Gantt">
-                </div>
-            </div>
-            `
-                : ""
-            }
-            
-            <!-- Pie de página -->
-            <div class="footer">
-                Informe generado por Gestor Profesional de Proyectos
-            </div>
-        </div>
-    </body>
-    </html>`;
-
-        // Abrir ventana de impresión
         const printWindow = window.open(
           "",
           "_blank",
           "width=1200,height=800,toolbar=yes,scrollbars=yes,menubar=yes",
         );
-
         if (printWindow) {
           printWindow.document.write(printHtml);
           printWindow.document.close();
           printWindow.focus();
-
-          printWindow.onload = () => {
-            setTimeout(() => {
-              printWindow.print();
-            }, 500);
-          };
+          printWindow.onload = () => setTimeout(() => printWindow.print(), 500);
         } else {
           showToast(
-            "Por favor, permite las ventanas emergentes para generar el reporte",
+            "Permite ventanas emergentes para generar el reporte",
             "error",
           );
         }
@@ -2903,7 +4027,7 @@
         updateRangeUI();
       }
 
-      // ==================== INICIALIZACIÓN ====================
+      // ==================== INICIALIZACION ====================
       function init() {
         loadData();
         renderAll();
@@ -2922,7 +4046,6 @@
         document.getElementById("customizeBtn").onclick = () =>
           (document.getElementById("customizeModal").style.display = "block");
         document.getElementById("newEtapaBtn").onclick = () => openEtapaModal();
-
         document.getElementById("applyRangeBtn").onclick = () => {
           const start = document.getElementById("rangeStartDate").value;
           const end = document.getElementById("rangeEndDate").value;
@@ -2933,7 +4056,6 @@
         document.querySelectorAll(".quick-btn").forEach((btn) => {
           btn.onclick = () => applyQuickRange(btn.dataset.range);
         });
-
         document.getElementById("importProjectFile").onchange = (e) => {
           if (e.target.files[0]) importProject(e.target.files[0]);
           e.target.value = "";
@@ -2944,8 +4066,28 @@
         };
         document.getElementById("mobileProjectHeader").onclick =
           toggleMobileList;
+        document
+          .getElementById("globalSearchInput")
+          .addEventListener("input", searchGlobal);
+        document.getElementById("searchReportBtn").onclick =
+          generateSearchReport;
+        document.getElementById("clearSearchBtn").onclick = clearSearch;
+        document.getElementById("addCommentBtn").onclick = () => {
+          const etapaId = document.getElementById("taskEtapaId").value;
+          const taskId = document.getElementById("taskId").value;
+          const text = document.getElementById("commentText").value.trim();
+          if (!taskId) {
+            showToast("Guarde la actividad primero", "error");
+            return;
+          }
+          if (!text) {
+            showToast("Escriba un comentario", "error");
+            return;
+          }
+          addComment(etapaId, taskId, text);
+          document.getElementById("commentText").value = "";
+        };
 
-        // Cerrar modales
         document
           .querySelectorAll(".close-task, #cancelTaskBtn")
           .forEach(
@@ -2983,25 +4125,79 @@
                 (document.getElementById("customizeModal").style.display =
                   "none")),
           );
+        document
+          .querySelectorAll(".close-comments-modal, #cancelCommentsBtn")
+          .forEach(
+            (el) =>
+              (el.onclick = () =>
+                (document.getElementById("commentsModal").style.display =
+                  "none")),
+          );
+        document.getElementById("saveCommentsBtn").onclick =
+          addCommentFromModal;
+
         window.onclick = (e) => {
           if (e.target.classList.contains("modal"))
             e.target.style.display = "none";
         };
 
-        // Formulario tarea
         document.getElementById("taskForm").onsubmit = (e) => {
           e.preventDefault();
           const etapaId = document.getElementById("taskEtapaId").value;
           const etapa = getEtapa(etapaId);
+          const project = getCurrentProject();
+          const taskStart = document.getElementById("taskStart").value;
+          const taskEnd = document.getElementById("taskEnd").value;
+
+          if (etapa.startDate && taskStart < etapa.startDate) {
+            showToast(
+              `La tarea no puede iniciar antes que la etapa (${formatDate(etapa.startDate)})`,
+              "error",
+            );
+            return false;
+          }
+          if (etapa.endDate && taskEnd > etapa.endDate) {
+            showToast(
+              `La tarea no puede terminar despues que la etapa (${formatDate(etapa.endDate)})`,
+              "error",
+            );
+            return false;
+          }
+          if (project.startDate && taskStart < project.startDate) {
+            showToast(
+              `La tarea no puede iniciar antes que el proyecto (${formatDate(project.startDate)})`,
+              "error",
+            );
+            return false;
+          }
+          if (project.endDate && taskEnd > project.endDate) {
+            showToast(
+              `La tarea no puede terminar despues que el proyecto (${formatDate(project.endDate)})`,
+              "error",
+            );
+            return false;
+          }
+          if (taskStart > taskEnd) {
+            showToast(
+              "La fecha de inicio no puede ser mayor que la fecha de fin",
+              "error",
+            );
+            return false;
+          }
+
           const taskData = {
             name: document.getElementById("taskName").value,
             responsable: document.getElementById("taskResponsable").value,
             priority: document.getElementById("taskPriority").value,
-            start: document.getElementById("taskStart").value,
-            end: document.getElementById("taskEnd").value,
+            start: taskStart,
+            end: taskEnd,
             dependencies: getSelectedDependencies(),
             progress: parseInt(document.getElementById("taskProgress").value),
             color: document.getElementById("taskColor").value,
+            comments: currentEditTaskId
+              ? etapa.tasks.find((t) => t.id === currentEditTaskId)?.comments ||
+                []
+              : [],
           };
           if (currentEditTaskId) {
             const idx = etapa.tasks.findIndex(
@@ -3032,10 +4228,39 @@
         document.getElementById("etapaForm").onsubmit = (e) => {
           e.preventDefault();
           const project = getCurrentProject();
+          const etapaStart = document.getElementById("etapaStart").value;
+          const etapaEnd = document.getElementById("etapaEnd").value;
+
+          if (
+            etapaStart &&
+            project.startDate &&
+            etapaStart < project.startDate
+          ) {
+            showToast(
+              `La etapa no puede iniciar antes que el proyecto (${formatDate(project.startDate)})`,
+              "error",
+            );
+            return false;
+          }
+          if (etapaEnd && project.endDate && etapaEnd > project.endDate) {
+            showToast(
+              `La etapa no puede terminar despues que el proyecto (${formatDate(project.endDate)})`,
+              "error",
+            );
+            return false;
+          }
+          if (etapaStart && etapaEnd && etapaStart > etapaEnd) {
+            showToast(
+              "La fecha de inicio no puede ser mayor que la fecha de fin",
+              "error",
+            );
+            return false;
+          }
+
           const etapaData = {
             name: document.getElementById("etapaName").value,
-            startDate: document.getElementById("etapaStart").value,
-            endDate: document.getElementById("etapaEnd").value,
+            startDate: etapaStart,
+            endDate: etapaEnd,
             description: document.getElementById("etapaDesc").value,
             tasks: [],
             notes: [],
@@ -3071,7 +4296,6 @@
             document.getElementById("taskProgress").value;
         };
 
-        // Rango colapsable
         const rangeHeader = document.getElementById("rangeSectionHeader");
         const rangeContent = document.getElementById("rangeSectionContent");
         if (rangeHeader && rangeContent) {
@@ -3089,7 +4313,6 @@
           };
         }
 
-        // Personalización
         document.getElementById("modalBarHeight").oninput = () =>
           (document.getElementById("barHeightVal").textContent =
             document.getElementById("modalBarHeight").value + "px");
@@ -3123,7 +4346,7 @@
           saveData();
           renderGanttChart();
           document.getElementById("customizeModal").style.display = "none";
-          showToast("Configuración aplicada", "success");
+          showToast("Configuracion aplicada", "success");
         };
 
         document.getElementById("resetCustomizeBtn").onclick = () => {
@@ -3150,10 +4373,9 @@
           document.getElementById("fontSizeVal").textContent = "14px";
           saveData();
           renderGanttChart();
-          showToast("Configuración restaurada", "success");
+          showToast("Configuracion restaurada", "success");
         };
 
-        // Event delegation para botones dinámicos
         document.addEventListener("click", (e) => {
           if (
             e.target.classList.contains("edit-task") ||
@@ -3185,6 +4407,98 @@
             e.stopPropagation();
             deleteNote(btn.dataset.id, btn.dataset.etapa);
           }
+          if (
+            e.target.classList.contains("comments-task") ||
+            e.target.closest(".comments-task")
+          ) {
+            const btn = e.target.classList.contains("comments-task")
+              ? e.target
+              : e.target.closest(".comments-task");
+            e.stopPropagation();
+            openCommentsModal(btn.dataset.etapa, btn.dataset.id);
+          }
+          if (
+            e.target.classList.contains("delete-comment") ||
+            e.target.closest(".delete-comment")
+          ) {
+            const btn = e.target.classList.contains("delete-comment")
+              ? e.target
+              : e.target.closest(".delete-comment");
+            e.stopPropagation();
+            if (confirm("Eliminar este comentario?")) {
+              deleteComment(
+                btn.dataset.etapa,
+                btn.dataset.task,
+                btn.dataset.comment,
+              );
+            }
+          }
+        });
+
+        // Modal de ayuda
+        document.getElementById("helpBtn").onclick = () => {
+          document.getElementById("helpModal").style.display = "block";
+        };
+
+        // Cerrar modal de ayuda
+        document
+          .querySelectorAll(".close-help, #closeHelpBtn")
+          .forEach((el) => {
+            el.onclick = () =>
+              (document.getElementById("helpModal").style.display = "none");
+          });
+
+        // Pestañas de ayuda
+        document.getElementById("helpDocTab").onclick = () => {
+          document.getElementById("helpDocTab").classList.add("active");
+          document.getElementById("helpFaqTab").classList.remove("active");
+          document.getElementById("helpDocPanel").style.display = "block";
+          document.getElementById("helpFaqPanel").style.display = "none";
+        };
+
+        document.getElementById("helpFaqTab").onclick = () => {
+          document.getElementById("helpFaqTab").classList.add("active");
+          document.getElementById("helpDocTab").classList.remove("active");
+          document.getElementById("helpFaqPanel").style.display = "block";
+          document.getElementById("helpDocPanel").style.display = "none";
+        };
+
+        // Colapsables de documentación
+        document
+          .querySelectorAll(".help-collapsible-header")
+          .forEach((header) => {
+            header.onclick = () => {
+              const content = header.nextElementSibling;
+              const isOpen = content.classList.contains("open");
+
+              // Cerrar todos los demás (opcional)
+              document
+                .querySelectorAll(".help-collapsible-content")
+                .forEach((c) => {
+                  if (c !== content) c.classList.remove("open");
+                });
+              document
+                .querySelectorAll(".help-collapsible-header")
+                .forEach((h) => {
+                  if (h !== header) h.classList.remove("open");
+                });
+
+              content.classList.toggle("open");
+              header.classList.toggle("open");
+            };
+          });
+
+        // Colapsables de FAQ
+        document.querySelectorAll(".faq-question").forEach((question) => {
+          question.onclick = () => {
+            const answer = document.getElementById(
+              "faq-" + question.dataset.faq,
+            );
+            const isOpen = answer.classList.contains("open");
+
+            answer.classList.toggle("open");
+            question.classList.toggle("open");
+          };
         });
       }
 
