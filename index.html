@@ -1253,9 +1253,7 @@
   <body>
     <div class="container">
       <div class="app-header">
-        <h1>
-          <i class="fas fa-project-diagram"></i> GanttFlow
-        </h1>
+        <h1><i class="fas fa-project-diagram"></i> GanttFlow</h1>
       </div>
 
       <div class="project-info-card" id="projectInfoCard">
@@ -3883,116 +3881,305 @@
           totalTasks === 0 ? 0 : Math.round(totalProgress / totalTasks);
 
         const printHtml = `<!DOCTYPE html>
-            <html lang="es"><head><meta charset="UTF-8"><title>${cleanText(project.name)} - Reporte de Proyecto</title>
-            <style>
-                * { margin: 0; padding: 0; box-sizing: border-box; }
-                body { font-family: 'Segoe UI', Arial, sans-serif; background: white; padding: 20px; color: #1a1a2e; }
-                .report-container { max-width: 1200px; margin: 0 auto; background: white; }
-                .header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #4f46e5; }
-                .header h1 { font-size: 28px; color: #1e1b4b; margin-bottom: 10px; }
-                .info-card { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; padding: 20px; border-radius: 12px; margin-bottom: 25px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px; }
-                .info-item { display: flex; align-items: center; gap: 8px; font-size: 13px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 20px; }
-                .progress-bar-container { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; display: flex; align-items: center; gap: 10px; }
-                .progress-bar { width: 120px; height: 8px; background: rgba(255,255,255,0.3); border-radius: 10px; overflow: hidden; }
-                .progress-fill { height: 100%; background: linear-gradient(90deg, #22c55e, #16a34a); border-radius: 10px; width: ${globalProgress}%; }
-                .section-title { font-size: 20px; font-weight: bold; color: #1e1b4b; margin: 25px 0 15px 0; padding-left: 10px; border-left: 4px solid #4f46e5; }
-                .etapa-card { margin-bottom: 25px; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; break-inside: avoid; }
-                .etapa-header { background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); padding: 12px 16px; border-bottom: 2px solid #4f46e5; }
-                .etapa-header h3 { font-size: 16px; font-weight: bold; color: #1e1b4b; margin-bottom: 6px; }
-                .etapa-fechas { font-size: 11px; color: #6b7280; display: flex; gap: 15px; flex-wrap: wrap; }
-                .etapa-progress { margin-top: 8px; font-size: 12px; }
-                .progress-table { width: 100%; border-collapse: collapse; margin-top: 5px; }
-                .progress-table td { padding: 4px 0; border: none; }
-                .tasks-table { width: 100%; border-collapse: collapse; font-size: 11px; }
-                .tasks-table th { background: #4f46e5; color: white; padding: 10px 8px; text-align: left; font-weight: 600; font-size: 10px; }
-                .tasks-table td { padding: 10px 8px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
-                .tasks-table tr:nth-child(even) { background-color: #f9fafb; }
-                .progress-cell-table { width: 100%; border-collapse: collapse; }
-                .progress-cell-table td { padding: 3px 0; border: none; }
-                .priority-badge-pdf { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 9px; font-weight: 600; }
-                .priority-high-pdf { background: #fee2e2; color: #dc2626; }
-                .priority-medium-pdf { background: #fef3c7; color: #d97706; }
-                .priority-low-pdf { background: #dcfce7; color: #16a34a; }
-                .comments-list-pdf { margin: 0; padding-left: 16px; font-size: 9px; color: #4b5563; }
-                .comments-list-pdf li { margin-bottom: 3px; }
-                .etapa-notes { background: #fefce8; padding: 12px 16px; border-top: 1px solid #fde047; }
-                .notes-list { list-style: none; padding-left: 0; }
-                .notes-list li { font-size: 11px; color: #422006; padding: 4px 0; padding-left: 16px; position: relative; }
-                .notes-list li:before { content: "•"; position: absolute; left: 4px; color: #eab308; }
-                .gantt-section { margin-top: 25px; page-break-before: avoid; }
-                .gantt-image { border: 1px solid #e5e7eb; border-radius: 8px; overflow-x: auto; background: white; }
-                .gantt-image img { width: 100%; height: auto; }
-                .footer { margin-top: 40px; padding-top: 15px; text-align: center; font-size: 9px; color: #9ca3af; border-top: 1px solid #e5e7eb; }
-                @media print { body { padding: 0; margin: 0; } .info-card { break-inside: avoid; } .etapa-card { break-inside: avoid; } .gantt-section { break-before: page; } .progress-table td, .progress-cell-table td, .tasks-table th { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
-            </style></head>
-            <body><div class="report-container">
-                <div class="header"><h1>${cleanText(project.name) || "Informe de Proyecto"}</h1><div class="subtitle">Reporte generado el ${new Date().toLocaleString("es-ES")}</div></div>
-                <div class="info-card"><div class="info-item">Responsable: ${cleanText(project.responsable) || "No asignado"}</div><div class="info-item">Periodo: ${formatDate(project.startDate) || "N/E"} - ${formatDate(project.endDate) || "N/E"}</div><div class="progress-bar-container">Progreso global: ${globalProgress}%<div class="progress-bar"><div class="progress-fill"></div></div></div></div>
-                <div class="section-title">Estructura del Proyecto</div>
-                ${project.etapas
-                  .map((etapa) => {
-                    const etapaName = cleanText(etapa.name) || "Sin nombre";
-                    const etapaStart =
-                      formatDate(etapa.startDate) || "No definida";
-                    const etapaEnd = formatDate(etapa.endDate) || "No definida";
-                    const etapaProgress = calculateEtapaProgress(etapa);
-                    let progressColor =
-                      etapaProgress >= 80
-                        ? "#22c55e"
-                        : etapaProgress >= 50
-                          ? "#eab308"
-                          : "#ef4444";
-                    let tasksHtml = "";
-                    if (etapa.tasks && etapa.tasks.length) {
-                      tasksHtml = `<table class="tasks-table"><thead><tr><th style="width:25%">Actividad</th><th style="width:12%">Responsable</th><th style="width:10%">Prioridad</th><th style="width:10%">Inicio</th><th style="width:10%">Fin</th><th style="width:18%">Progreso</th><th style="width:15%">Comentarios</th></tr></thead><tbody>${etapa.tasks
-                        .map((task) => {
-                          let priorityBadge = "";
-                          if (task.priority === "Alta")
-                            priorityBadge =
-                              '<span class="priority-badge-pdf priority-high-pdf">Alta</span>';
-                          else if (task.priority === "Media")
-                            priorityBadge =
-                              '<span class="priority-badge-pdf priority-medium-pdf">Media</span>';
-                          else
-                            priorityBadge =
-                              '<span class="priority-badge-pdf priority-low-pdf">Baja</span>';
-                          let commentsHtml = "";
-                          if (task.comments && task.comments.length > 0) {
-                            commentsHtml =
-                              '<ul class="comments-list-pdf">' +
-                              task.comments
-                                .map((c) => `<li>${cleanText(c.text)}</li>`)
-                                .join("") +
-                              "</ul>";
-                          } else {
-                            commentsHtml =
-                              '<span style="color:#9ca3af; font-size:9px;">—</span>';
-                          }
-                          let taskProgressColor =
-                            task.progress >= 80
-                              ? "#22c55e"
-                              : task.progress >= 50
-                                ? "#eab308"
-                                : "#ef4444";
-                          return `<tr><td>${cleanText(task.name)}</td><td>${cleanText(task.responsable) || "No asignado"}</td><td>${priorityBadge}</td><td>${formatDate(task.start) || "N/E"}</td><td>${formatDate(task.end) || "N/E"}</td><td><div style="display:flex; align-items:center; gap:6px;"><div style="flex:1;"><table class="progress-cell-table"><tr><td style="width:${task.progress}%; background:${taskProgressColor};"></td><td style="width:${100 - task.progress}%; background:#e5e7eb;"></td></tr></table></div><span>${task.progress}%</span></div></td><td>${commentsHtml}</td></tr>`;
-                        })
-                        .join("")}</tbody></table>`;
-                    } else {
-                      tasksHtml =
-                        '<div style="padding:20px; text-align:center; color:#9ca3af;">No hay actividades registradas</div>';
-                    }
-                    let notesHtml = "";
-                    if (etapa.notes && etapa.notes.length) {
-                      notesHtml = `<div class="etapa-notes"><div class="notes-title">Notas de la etapa</div><ul class="notes-list">${etapa.notes.map((note) => `<li>${cleanText(note.text)}</li>`).join("")}</ul></div>`;
-                    } else {
-                      notesHtml = `<div class="etapa-notes"><div class="notes-title">Notas de la etapa</div><div style="font-size:11px; color:#9ca3af;">Sin notas registradas</div></div>`;
-                    }
-                    return `<div class="etapa-card"><div class="etapa-header"><h3>${etapaName}</h3><div class="etapa-fechas"><span>Inicio: ${etapaStart}</span><span>Fin: ${etapaEnd}</span></div><div class="etapa-progress"><span>Progreso de etapa: ${etapaProgress}%</span><table class="progress-table"><tr><td style="width:${etapaProgress}%; background:${progressColor};"></td><td style="width:${100 - etapaProgress}%; background:#d1d5db;"></td></tr></table></div></div>${tasksHtml}${notesHtml}</div>`;
-                  })
-                  .join("")}
-                ${ganttImageSrc ? `<div class="gantt-section"><div class="section-title">Diagrama de Gantt</div><div class="gantt-image"><img src="${ganttImageSrc}" alt="Diagrama de Gantt"></div></div>` : ""}
-                <div class="footer">Informe generado por Gestor Profesional de Proyectos</div>
-            </div></body></html>`;
+    <html lang="es"><head><meta charset="UTF-8"><title>${cleanText(project.name)} - Reporte de Proyecto</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background: white; 
+            padding: 15px 20px; 
+            color: #1a1a2e; 
+        }
+        .report-container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            background: white; 
+        }
+        /* Encabezado compacto */
+        .header { 
+            text-align: center; 
+            margin-bottom: 15px; 
+            padding-bottom: 10px; 
+            border-bottom: 2px solid #4f46e5; 
+        }
+        .header h1 { 
+            font-size: 24px; 
+            color: #1e1b4b; 
+            margin-bottom: 5px; 
+        }
+        .header .subtitle { 
+            color: #6b7280; 
+            font-size: 11px; 
+        }
+        /* Tarjeta de información compacta */
+        .info-card { 
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); 
+            color: white; 
+            padding: 12px 20px; 
+            border-radius: 12px; 
+            margin-bottom: 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            flex-wrap: wrap; 
+            gap: 10px; 
+        }
+        .info-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            font-size: 12px; 
+            background: rgba(255,255,255,0.15); 
+            padding: 4px 12px; 
+            border-radius: 20px; 
+        }
+        .progress-bar-container { 
+            background: rgba(255,255,255,0.2); 
+            padding: 4px 12px; 
+            border-radius: 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        .progress-bar { 
+            width: 100px; 
+            height: 6px; 
+            background: rgba(255,255,255,0.3); 
+            border-radius: 10px; 
+            overflow: hidden; 
+        }
+        .progress-fill { 
+            height: 100%; 
+            background: linear-gradient(90deg, #22c55e, #16a34a); 
+            border-radius: 10px; 
+            width: ${globalProgress}%; 
+        }
+        /* Título de sección compacto */
+        .section-title { 
+            font-size: 18px; 
+            font-weight: bold; 
+            color: #1e1b4b; 
+            margin: 0 0 12px 0; 
+            padding-left: 8px; 
+            border-left: 4px solid #4f46e5; 
+        }
+        /* Tarjeta de etapa - sin márgenes extra */
+        .etapa-card { 
+            margin-bottom: 16px; 
+            border: 1px solid #e5e7eb; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            break-inside: avoid; 
+        }
+        .etapa-header { 
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); 
+            padding: 10px 14px; 
+            border-bottom: 2px solid #4f46e5; 
+        }
+        .etapa-header h3 { 
+            font-size: 14px; 
+            font-weight: bold; 
+            color: #1e1b4b; 
+            margin-bottom: 4px; 
+        }
+        .etapa-fechas { 
+            font-size: 10px; 
+            color: #6b7280; 
+            display: flex; 
+            gap: 12px; 
+            flex-wrap: wrap; 
+        }
+        .etapa-progress { 
+            margin-top: 6px; 
+            font-size: 11px; 
+        }
+        .progress-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 4px; 
+        }
+        .progress-table td { 
+            padding: 3px 0; 
+            border: none; 
+        }
+        /* Tabla de actividades compacta */
+        .tasks-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            font-size: 10px; 
+        }
+        .tasks-table th { 
+            background: #4f46e5; 
+            color: white; 
+            padding: 6px 6px; 
+            text-align: left; 
+            font-weight: 600; 
+            font-size: 9px; 
+        }
+        .tasks-table td { 
+            padding: 6px 6px; 
+            border-bottom: 1px solid #e5e7eb; 
+            vertical-align: top; 
+        }
+        .tasks-table tr:nth-child(even) { 
+            background-color: #f9fafb; 
+        }
+        .progress-cell-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+        }
+        .progress-cell-table td { 
+            padding: 2px 0; 
+            border: none; 
+        }
+        .priority-badge-pdf { 
+            display: inline-block; 
+            padding: 2px 6px; 
+            border-radius: 20px; 
+            font-size: 8px; 
+            font-weight: 600; 
+        }
+        .priority-high-pdf { background: #fee2e2; color: #dc2626; }
+        .priority-medium-pdf { background: #fef3c7; color: #d97706; }
+        .priority-low-pdf { background: #dcfce7; color: #16a34a; }
+        .comments-list-pdf { 
+            margin: 0; 
+            padding-left: 14px; 
+            font-size: 8px; 
+            color: #4b5563; 
+        }
+        .comments-list-pdf li { 
+            margin-bottom: 2px; 
+        }
+        .etapa-notes { 
+            background: #fefce8; 
+            padding: 8px 12px; 
+            border-top: 1px solid #fde047; 
+            font-size: 10px; 
+        }
+        .notes-list { 
+            list-style: none; 
+            padding-left: 0; 
+        }
+        .notes-list li { 
+            font-size: 10px; 
+            color: #422006; 
+            padding: 3px 0; 
+            padding-left: 14px; 
+            position: relative; 
+        }
+        .notes-list li:before { 
+            content: "•"; 
+            position: absolute; 
+            left: 4px; 
+            color: #eab308; 
+        }
+        .gantt-section { 
+            margin-top: 20px; 
+            page-break-before: avoid; 
+        }
+        .gantt-image { 
+            border: 1px solid #e5e7eb; 
+            border-radius: 8px; 
+            overflow-x: auto; 
+            background: white; 
+        }
+        .gantt-image img { 
+            width: 100%; 
+            height: auto; 
+        }
+        .footer { 
+            margin-top: 20px; 
+            padding-top: 10px; 
+            text-align: center; 
+            font-size: 8px; 
+            color: #9ca3af; 
+            border-top: 1px solid #e5e7eb; 
+        }
+        @media print { 
+            body { padding: 0; margin: 0; } 
+            .info-card { break-inside: avoid; } 
+            .etapa-card { break-inside: avoid; } 
+            .gantt-section { break-before: page; } 
+            .progress-table td, .progress-cell-table td, .tasks-table th { 
+                -webkit-print-color-adjust: exact; 
+                print-color-adjust: exact; 
+            } 
+        }
+    </style></head>
+    <body><div class="report-container">
+        <div class="header">
+            <h1>${cleanText(project.name) || "Informe de Proyecto"}</h1>
+            <div class="subtitle">Reporte generado el ${new Date().toLocaleString("es-ES")}</div>
+        </div>
+        <div class="info-card">
+            <div class="info-item">Responsable: ${cleanText(project.responsable) || "No asignado"}</div>
+            <div class="info-item">Periodo: ${formatDate(project.startDate) || "N/E"} - ${formatDate(project.endDate) || "N/E"}</div>
+            <div class="progress-bar-container">Progreso global: ${globalProgress}%<div class="progress-bar"><div class="progress-fill"></div></div></div>
+        </div>
+        <div class="section-title">Estructura del Proyecto</div>
+        ${project.etapas
+          .map((etapa) => {
+            const etapaName = cleanText(etapa.name) || "Sin nombre";
+            const etapaStart = formatDate(etapa.startDate) || "No definida";
+            const etapaEnd = formatDate(etapa.endDate) || "No definida";
+            const etapaProgress = calculateEtapaProgress(etapa);
+            let progressColor =
+              etapaProgress >= 80
+                ? "#22c55e"
+                : etapaProgress >= 50
+                  ? "#eab308"
+                  : "#ef4444";
+            let tasksHtml = "";
+            if (etapa.tasks && etapa.tasks.length) {
+              tasksHtml = `<table class="tasks-table"><thead><tr><th style="width:25%">Actividad</th><th style="width:12%">Responsable</th><th style="width:10%">Prioridad</th><th style="width:10%">Inicio</th><th style="width:10%">Fin</th><th style="width:18%">Progreso</th><th style="width:15%">Comentarios</th></tr></thead><tbody>${etapa.tasks
+                .map((task) => {
+                  let priorityBadge = "";
+                  if (task.priority === "Alta")
+                    priorityBadge =
+                      '<span class="priority-badge-pdf priority-high-pdf">Alta</span>';
+                  else if (task.priority === "Media")
+                    priorityBadge =
+                      '<span class="priority-badge-pdf priority-medium-pdf">Media</span>';
+                  else
+                    priorityBadge =
+                      '<span class="priority-badge-pdf priority-low-pdf">Baja</span>';
+                  let commentsHtml = "";
+                  if (task.comments && task.comments.length > 0) {
+                    commentsHtml =
+                      '<ul class="comments-list-pdf">' +
+                      task.comments
+                        .map((c) => `<li>${cleanText(c.text)}</li>`)
+                        .join("") +
+                      "</ul>";
+                  } else {
+                    commentsHtml =
+                      '<span style="color:#9ca3af; font-size:8px;">—</span>';
+                  }
+                  let taskProgressColor =
+                    task.progress >= 80
+                      ? "#22c55e"
+                      : task.progress >= 50
+                        ? "#eab308"
+                        : "#ef4444";
+                  return `<tr><td>${cleanText(task.name)}</td><td>${cleanText(task.responsable) || "No asignado"}</td><td>${priorityBadge}</td><td>${formatDate(task.start) || "N/E"}</td><td>${formatDate(task.end) || "N/E"}</td><td><div style="display:flex; align-items:center; gap:5px;"><div style="flex:1;"><table class="progress-cell-table"><tr><td style="width:${task.progress}%; background:${taskProgressColor};"></td><td style="width:${100 - task.progress}%; background:#e5e7eb;"></td></tr></table></div><span>${task.progress}%</span></div></td><td>${commentsHtml}</td></tr>`;
+                })
+                .join("")}</tbody></table>`;
+            } else {
+              tasksHtml =
+                '<div style="padding:12px; text-align:center; color:#9ca3af; font-size:11px;">No hay actividades registradas</div>';
+            }
+            let notesHtml = "";
+            if (etapa.notes && etapa.notes.length) {
+              notesHtml = `<div class="etapa-notes"><strong style="font-size:10px;">Notas:</strong><ul class="notes-list">${etapa.notes.map((note) => `<li>${cleanText(note.text)}</li>`).join("")}</ul></div>`;
+            } else {
+              notesHtml = "";
+            }
+            return `<div class="etapa-card"><div class="etapa-header"><h3>${etapaName}</h3><div class="etapa-fechas"><span>Inicio: ${etapaStart}</span><span>Fin: ${etapaEnd}</span></div><div class="etapa-progress"><span>Progreso: ${etapaProgress}%</span><table class="progress-table"><tr><td style="width:${etapaProgress}%; background:${progressColor};"></td><td style="width:${100 - etapaProgress}%; background:#d1d5db;"></td></tr></table></div></div>${tasksHtml}${notesHtml}</div>`;
+          })
+          .join("")}
+        ${ganttImageSrc ? `<div class="gantt-section"><div class="section-title">Diagrama de Gantt</div><div class="gantt-image"><img src="${ganttImageSrc}" alt="Diagrama de Gantt"></div></div>` : ""}
+        <div class="footer">Informe generado por Gestor Profesional de Proyectos - GanttFlow</div>
+    </div></body></html>`;
 
         const printWindow = window.open(
           "",
