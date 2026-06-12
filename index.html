@@ -1248,6 +1248,70 @@
           font-size: 12px;
         }
       }
+
+      /* Estilos para el nuevo Gantt */
+      .gantt-svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: white;
+        border-radius: 12px;
+      }
+
+      .gantt-svg text {
+        user-select: none;
+      }
+
+      .gantt-bar {
+        transition: opacity 0.2s;
+      }
+
+      .gantt-bar:hover {
+        opacity: 0.85;
+        filter: brightness(1.05);
+      }
+
+      /* Scroll personalizado para el Gantt */
+      #ganttChart::-webkit-scrollbar {
+        height: 8px;
+        width: 8px;
+      }
+
+      #ganttChart::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 10px;
+      }
+
+      #ganttChart::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+      }
+
+      #ganttChart::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+
+      /* Responsive Gantt */
+      @media (max-width: 768px) {
+        .gantt-svg text {
+          font-size: 9px !important;
+        }
+      }
+
+      @media print {
+        .gantt-container button,
+        .gantt-container input,
+        .gantt-container .btn-primary,
+        .gantt-container .btn-info,
+        .gantt-container .btn-secondary {
+          display: none !important;
+        }
+
+        .gantt-svg {
+          max-width: 100%;
+          height: auto;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1377,11 +1441,101 @@
       <div id="etapasContainer"></div>
 
       <div class="gantt-container">
-        <h3>
-          <i class="fas fa-chart-gantt"></i> Diagrama de Gantt -
-          <span id="currentProjectName"></span>
-        </h3>
-        <div id="ganttChart">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+          "
+        >
+          <h3 style="margin: 0">
+            <i class="fas fa-chart-gantt"></i> Diagrama de Gantt -
+            <span id="currentProjectName"></span>
+          </h3>
+          <div
+            style="
+              display: flex;
+              gap: 10px;
+              align-items: center;
+              flex-wrap: wrap;
+            "
+          >
+            <!-- Control de escala (Zoom) -->
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                background: #f8fafc;
+                padding: 5px 12px;
+                border-radius: 30px;
+              "
+            >
+              <i
+                class="fas fa-search-minus"
+                style="color: #64748b; cursor: pointer"
+                id="zoomOutBtn"
+              ></i>
+              <input
+                type="range"
+                id="ganttScaleControl"
+                min="0.3"
+                max="2"
+                step="0.05"
+                value="1"
+                style="width: 140px"
+              />
+              <i
+                class="fas fa-search-plus"
+                style="color: #64748b; cursor: pointer"
+                id="zoomInBtn"
+              ></i>
+              <span
+                id="scaleValue"
+                style="
+                  font-size: 12px;
+                  font-weight: 600;
+                  color: #1e293b;
+                  min-width: 45px;
+                  background: white;
+                  padding: 2px 8px;
+                  border-radius: 20px;
+                "
+                >100%</span
+              >
+            </div>
+
+            <!-- Botones de vista -->
+            <button
+              id="viewFromStartBtn"
+              class="btn-primary"
+              style="padding: 6px 12px"
+              title="Ver desde inicio del proyecto"
+            >
+              <i class="fas fa-calendar-alt"></i> Inicio
+            </button>
+            <button
+              id="centerTodayBtn"
+              class="btn-info"
+              style="padding: 6px 12px"
+              title="Centrar en fecha actual"
+            >
+              <i class="fas fa-calendar-day"></i> Hoy
+            </button>
+            <button
+              id="zoomToFitBtn"
+              class="btn-secondary"
+              style="padding: 6px 12px"
+              title="Ver todo el proyecto"
+            >
+              <i class="fas fa-arrows-alt"></i> Todo
+            </button>
+          </div>
+        </div>
+        <div id="ganttChart" style="overflow-x: auto; width: 100%">
           <div style="text-align: center; padding: 60px">
             Cargando grafico...
           </div>
@@ -3318,22 +3472,40 @@
         const container = document.getElementById("ganttChart");
         const project = getCurrentProject();
         const allTasks = [];
+
         if (project.etapas) {
           project.etapas.forEach((etapa) => {
-            if (etapa.tasks) {
+            if (etapa.tasks && etapa.tasks.length) {
               etapa.tasks.forEach((task) => {
-                allTasks.push({ ...task, etapaName: etapa.name });
+                allTasks.push({
+                  ...task,
+                  etapaName: etapa.name,
+                  etapaStart: etapa.startDate,
+                  etapaEnd: etapa.endDate,
+                });
               });
             }
           });
         }
+
         if (allTasks.length === 0) {
           container.innerHTML =
-            '<div style="text-align:center; padding:60px;">No hay actividades</div>';
+            '<div style="text-align:center; padding:60px; color:#94a3b8;"><i class="fas fa-chart-line" style="font-size: 40px; margin-bottom: 16px; display: block;"></i>No hay actividades para mostrar</div>';
           return;
         }
 
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        let currentViewMode =
+          localStorage.getItem("gantt_view_mode") || "project_start";
+        let currentScale = parseFloat(
+          localStorage.getItem("gantt_scale") || "1",
+        );
+        currentScale = Math.min(2, Math.max(0.1, currentScale));
+
         let minDate, maxDate;
+
         if (
           rangeSettings.manualMode &&
           rangeSettings.startDate &&
@@ -3341,89 +3513,377 @@
         ) {
           minDate = new Date(rangeSettings.startDate);
           maxDate = new Date(rangeSettings.endDate);
-        } else {
-          minDate = new Date(
-            Math.min(...allTasks.map((t) => new Date(t.start))),
+          currentViewMode = "manual";
+        } else if (currentViewMode === "today_centered") {
+          minDate = new Date(today);
+          minDate.setDate(today.getDate() - 20);
+          maxDate = new Date(today);
+          maxDate.setDate(today.getDate() + 60);
+        } else if (currentViewMode === "fit_all") {
+          const allDates = [
+            ...allTasks.map((t) => new Date(t.start)),
+            ...allTasks.map((t) => new Date(t.end)),
+          ];
+          if (project.startDate) allDates.push(new Date(project.startDate));
+          if (project.endDate) allDates.push(new Date(project.endDate));
+          minDate = new Date(Math.min(...allDates));
+          maxDate = new Date(Math.max(...allDates));
+          const margin = Math.max(
+            3,
+            Math.ceil(((maxDate - minDate) / (1000 * 60 * 60 * 24)) * 0.1),
           );
-          maxDate = new Date(Math.max(...allTasks.map((t) => new Date(t.end))));
-          let daysPad =
-            customSettings.viewMode === "Week"
-              ? 7
-              : customSettings.viewMode === "Month"
-                ? 15
-                : 2;
-          minDate.setDate(minDate.getDate() - daysPad);
-          maxDate.setDate(maxDate.getDate() + daysPad);
+          minDate.setDate(minDate.getDate() - margin);
+          maxDate.setDate(maxDate.getDate() + margin);
+        } else if (currentViewMode === "from_today") {
+          minDate = new Date(today);
+          const maxTaskDate = new Date(
+            Math.max(...allTasks.map((t) => new Date(t.end))),
+          );
+          maxDate = new Date(maxTaskDate);
+          maxDate.setDate(maxDate.getDate() + 14);
+          if (maxDate <= today) maxDate.setDate(today.getDate() + 45);
+        } else {
+          if (project.startDate && project.startDate !== "") {
+            minDate = new Date(project.startDate);
+          } else {
+            const earliestTask = new Date(
+              Math.min(...allTasks.map((t) => new Date(t.start))),
+            );
+            minDate = new Date(earliestTask);
+          }
+
+          const allEndDates = allTasks.map((t) => new Date(t.end));
+          if (project.endDate && project.endDate !== "") {
+            allEndDates.push(new Date(project.endDate));
+          }
+          maxDate = new Date(Math.max(...allEndDates));
+
+          const totalDuration = Math.ceil(
+            (maxDate - minDate) / (1000 * 60 * 60 * 24),
+          );
+          const margin = Math.max(5, Math.ceil(totalDuration * 0.2));
+          maxDate.setDate(maxDate.getDate() + margin);
+
+          if (minDate > today) {
+            const tempMin = new Date(minDate);
+            tempMin.setDate(minDate.getDate() - 10);
+            minDate = tempMin;
+          }
+
+          if (isNaN(minDate.getTime())) minDate = new Date(today);
+          if (isNaN(maxDate.getTime())) maxDate = new Date(today);
+          if (minDate > maxDate) [minDate, maxDate] = [maxDate, minDate];
         }
+
+        if (isNaN(minDate.getTime())) minDate = new Date(today);
+        if (isNaN(maxDate.getTime())) maxDate = new Date(today);
+        if (minDate > maxDate) [minDate, maxDate] = [maxDate, minDate];
 
         const totalDays = Math.ceil(
           (maxDate - minDate) / (1000 * 60 * 60 * 24),
         );
-        const dayWidth = customSettings.columnWidth;
+        if (totalDays <= 0) return;
+
         const barHeight = customSettings.barHeight;
+        const actividadColumnWidth = 240; // Ancho fijo de 240px para la columna de actividades
+        const baseDayWidth = customSettings.columnWidth;
+        const dayWidth = baseDayWidth * currentScale;
+        const totalWidth = actividadColumnWidth + totalDays * dayWidth + 50;
+        const rowHeight = barHeight + 14;
+        const totalHeight = allTasks.length * rowHeight + 60;
+
         const svg = document.createElementNS(
           "http://www.w3.org/2000/svg",
           "svg",
         );
-        svg.setAttribute("width", Math.max(totalDays * dayWidth + 250, 900));
-        svg.setAttribute("height", allTasks.length * (barHeight + 10) + 60);
+        svg.setAttribute("viewBox", `0 0 ${totalWidth} ${totalHeight}`);
+        svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+        svg.style.width = "100%";
+        svg.style.height = "auto";
         svg.style.backgroundColor = customSettings.bgColor;
-        let x = 200;
+        svg.classList.add("gantt-svg");
+
+        const mainGroup = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "g",
+        );
+
+        let x = actividadColumnWidth;
+        const headerY = 35;
+        let y = 45;
+
+        // Función para dividir texto en múltiples líneas respetando palabras completas
+        const wrapTextByWidth = (text, maxWidthPx, fontSize) => {
+          if (!text) return [""];
+
+          // Estimación aproximada: cada caracter ocupa ~fontSize * 0.6 px
+          const approxCharWidth = fontSize * 0.6;
+          const maxCharsPerLine = Math.floor(maxWidthPx / approxCharWidth);
+
+          // Si el texto es más corto que el máximo, devolver como una sola línea
+          if (text.length <= maxCharsPerLine) return [text];
+
+          // Dividir por palabras
+          const words = text.split(" ");
+          const lines = [];
+          let currentLine = "";
+
+          for (let i = 0; i < words.length; i++) {
+            const word = words[i];
+            // Probar si la palabra cabe en la línea actual
+            const testLine = currentLine ? `${currentLine} ${word}` : word;
+
+            if (testLine.length <= maxCharsPerLine) {
+              // Cabe, agregar a la línea actual
+              currentLine = testLine;
+            } else {
+              // No cabe, guardar línea actual y empezar una nueva con esta palabra
+              if (currentLine) lines.push(currentLine);
+              // Si la palabra sola es más larga que el máximo, forzar corte de esa palabra
+              if (word.length > maxCharsPerLine) {
+                // Dividir palabra larga (ej: "supercalifragilisticoespialidoso")
+                let remaining = word;
+                while (remaining.length > maxCharsPerLine) {
+                  lines.push(remaining.substring(0, maxCharsPerLine));
+                  remaining = remaining.substring(maxCharsPerLine);
+                }
+                currentLine = remaining;
+              } else {
+                currentLine = word;
+              }
+            }
+          }
+
+          // Agregar la última línea
+          if (currentLine) lines.push(currentLine);
+
+          return lines;
+        };
+
+        const getDateFormat = (date, idx, total) => {
+          if (total <= 21 || currentScale >= 1.3) {
+            return `${date.getDate()}/${date.getMonth() + 1}`;
+          } else if (total <= 90) {
+            if (idx % 2 === 0)
+              return `${date.getDate()}/${date.getMonth() + 1}`;
+            return "";
+          } else if (total <= 365) {
+            if (date.getDate() === 1)
+              return `${date.getMonth() + 1}/${date.getFullYear().toString().slice(-2)}`;
+            return "";
+          } else {
+            if (date.getMonth() === 0 && date.getDate() === 1)
+              return `${date.getFullYear()}`;
+            return "";
+          }
+        };
+
         for (let i = 0; i <= totalDays; i++) {
           const date = new Date(minDate);
           date.setDate(minDate.getDate() + i);
+          const dayOfWeek = date.getDay();
+          const xPos = actividadColumnWidth + i * dayWidth;
+
+          if (dayOfWeek === 0 || dayOfWeek === 6) {
+            const weekendBg = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "rect",
+            );
+            weekendBg.setAttribute("x", xPos);
+            weekendBg.setAttribute("y", headerY - 5);
+            weekendBg.setAttribute("width", dayWidth);
+            weekendBg.setAttribute("height", totalHeight - headerY);
+            weekendBg.setAttribute("fill", "#f8fafc");
+            weekendBg.setAttribute("opacity", "0.4");
+            mainGroup.appendChild(weekendBg);
+          }
+        }
+
+        for (let i = 0; i <= totalDays; i++) {
+          const date = new Date(minDate);
+          date.setDate(minDate.getDate() + i);
+          const xPos = actividadColumnWidth + i * dayWidth;
+          const isToday = date.toDateString() === today.toDateString();
+
           const line = document.createElementNS(
             "http://www.w3.org/2000/svg",
             "line",
           );
-          line.setAttribute("x1", x);
-          line.setAttribute("y1", 30);
-          line.setAttribute("x2", x);
-          line.setAttribute("y2", allTasks.length * (barHeight + 10) + 50);
+          line.setAttribute("x1", xPos);
+          line.setAttribute("y1", headerY - 5);
+          line.setAttribute("x2", xPos);
+          line.setAttribute("y2", totalHeight - 10);
           line.setAttribute("stroke", customSettings.borderColor);
-          svg.appendChild(line);
-          const text = document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "text",
-          );
-          text.setAttribute("x", x + 5);
-          text.setAttribute("y", 20);
-          text.setAttribute("font-size", customSettings.fontSize - 3 + "px");
-          text.setAttribute("fill", customSettings.dateColor);
-          text.textContent = `${date.getDate()}/${date.getMonth() + 1}`;
-          svg.appendChild(text);
-          x += dayWidth;
+          line.setAttribute("stroke-width", isToday ? "2" : "0.5");
+          mainGroup.appendChild(line);
+
+          if (isToday) {
+            const todayLine = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "line",
+            );
+            todayLine.setAttribute("x1", xPos);
+            todayLine.setAttribute("y1", headerY - 5);
+            todayLine.setAttribute("x2", xPos);
+            todayLine.setAttribute("y2", totalHeight - 10);
+            todayLine.setAttribute("stroke", "#ef4444");
+            todayLine.setAttribute("stroke-width", "2.5");
+            todayLine.setAttribute("stroke-dasharray", "6,4");
+            mainGroup.appendChild(todayLine);
+          }
+
+          const dateText = getDateFormat(date, i, totalDays);
+          if (dateText) {
+            const text = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "text",
+            );
+            const rotate = totalDays > 45 && currentScale < 0.7;
+            if (rotate) {
+              text.setAttribute(
+                "transform",
+                `rotate(-35, ${xPos + 5}, ${headerY - 3})`,
+              );
+              text.setAttribute("x", xPos + 5);
+              text.setAttribute("y", headerY - 3);
+            } else {
+              text.setAttribute("x", xPos + 4);
+              text.setAttribute("y", headerY);
+            }
+            text.setAttribute(
+              "font-size",
+              Math.max(8, customSettings.fontSize - 4) + "px",
+            );
+            text.setAttribute(
+              "fill",
+              isToday ? "#ef4444" : customSettings.dateColor,
+            );
+            text.setAttribute("font-weight", isToday ? "bold" : "normal");
+            text.textContent = dateText;
+            mainGroup.appendChild(text);
+          }
         }
-        let y = 50;
-        allTasks.forEach((task) => {
-          const nameText = document.createElementNS(
+
+        const headerLine = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "line",
+        );
+        headerLine.setAttribute("x1", 0);
+        headerLine.setAttribute("y1", headerY);
+        headerLine.setAttribute("x2", totalWidth);
+        headerLine.setAttribute("y2", headerY);
+        headerLine.setAttribute("stroke", customSettings.borderColor);
+        headerLine.setAttribute("stroke-width", "1.5");
+        mainGroup.appendChild(headerLine);
+
+        // Línea vertical separadora entre nombre de actividad y Gantt
+        const separatorLine = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "line",
+        );
+        separatorLine.setAttribute("x1", actividadColumnWidth - 5);
+        separatorLine.setAttribute("y1", headerY - 5);
+        separatorLine.setAttribute("x2", actividadColumnWidth - 5);
+        separatorLine.setAttribute("y2", totalHeight - 10);
+        separatorLine.setAttribute("stroke", customSettings.borderColor);
+        separatorLine.setAttribute("stroke-width", "1.5");
+        separatorLine.setAttribute("stroke-dasharray", "4,4");
+        mainGroup.appendChild(separatorLine);
+
+        allTasks.forEach((task, index) => {
+          const hLine = document.createElementNS(
             "http://www.w3.org/2000/svg",
-            "text",
+            "line",
           );
-          nameText.setAttribute("x", 10);
-          nameText.setAttribute("y", y + barHeight / 2 + 4);
-          nameText.setAttribute("font-size", customSettings.fontSize + "px");
-          nameText.setAttribute(
-            "fill",
-            task.progress === 100 ? "#9ca3af" : customSettings.fontColor,
+          hLine.setAttribute("x1", 0);
+          hLine.setAttribute("y1", y - 4);
+          hLine.setAttribute("x2", totalWidth);
+          hLine.setAttribute("y2", y - 4);
+          hLine.setAttribute("stroke", "#e2e8f0");
+          hLine.setAttribute("stroke-width", "0.5");
+          hLine.setAttribute("stroke-dasharray", "3,3");
+          mainGroup.appendChild(hLine);
+
+          // ==================== NUEVO: SOMBREADO INTERCALADO PARA FILAS ====================
+          // Determinar si es fila par o impar (para sombreado)
+          const isEvenRow = index % 2 === 0;
+
+          // Crear rectángulo de fondo para la fila completa (columna izquierda)
+          const rowBg = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "rect",
           );
-          nameText.textContent = `${task.etapaName}: ${task.name.substring(0, 25)}`;
-          svg.appendChild(nameText);
-          const startOffset = Math.max(
-            0,
-            Math.floor(
-              (new Date(task.start) - minDate) / (1000 * 60 * 60 * 24),
-            ),
+          rowBg.setAttribute("x", 0);
+          rowBg.setAttribute("y", y - 4); // Alinear con la fila actual
+          rowBg.setAttribute("width", actividadColumnWidth - 2); // Ancho solo de la columna izquierda
+          rowBg.setAttribute("height", rowHeight + 2); // Altura de la fila
+          rowBg.setAttribute("fill", isEvenRow ? "#f8fafc" : "#ffffff"); // Color intercalado
+          rowBg.setAttribute("rx", "4");
+          rowBg.setAttribute("ry", "4");
+          rowBg.setAttribute("opacity", "0.6");
+          mainGroup.appendChild(rowBg);
+
+          // ==================== ACTIVIDAD EN LADO IZQUIERDO (con ancho fijo de 220-240px) ====================
+          const taskName = task.name;
+          const actividadColumnWidthPx = 220; // Ancho disponible para el texto (dentro de los 240px totales)
+          const textFontSize = customSettings.fontSize - 2;
+          const taskNameLines = wrapTextByWidth(
+            taskName,
+            actividadColumnWidthPx,
+            textFontSize,
+          );
+
+          // Calcular altura total del texto para centrar verticalmente
+          const lineHeight = textFontSize + 4;
+          const totalTextHeight = taskNameLines.length * lineHeight;
+          const textStartY =
+            y + barHeight / 2 - totalTextHeight / 2 + lineHeight / 2;
+
+          // Dibujar nombre de actividad (múltiples líneas)
+          taskNameLines.forEach((line, lineIdx) => {
+            const nameText = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "text",
+            );
+            nameText.setAttribute("x", 8);
+            nameText.setAttribute("y", textStartY + lineIdx * lineHeight);
+            nameText.setAttribute("font-size", textFontSize + "px");
+            nameText.setAttribute("fill", customSettings.fontColor);
+            nameText.setAttribute("font-weight", "600");
+            nameText.textContent = line;
+            mainGroup.appendChild(nameText);
+          });
+
+          // ==================== BARRA DE PROGRESO ====================
+          const taskStart = new Date(task.start);
+          const taskEnd = new Date(task.end);
+          const startOffset = Math.floor(
+            (taskStart - minDate) / (1000 * 60 * 60 * 24),
           );
           const duration = Math.max(
             1,
-            Math.ceil(
-              (new Date(task.end) - new Date(task.start)) /
-                (1000 * 60 * 60 * 24),
-            ) + 1,
+            Math.ceil((taskEnd - taskStart) / (1000 * 60 * 60 * 24)) + 1,
           );
-          const barX = 200 + startOffset * dayWidth;
-          const barWidth = duration * dayWidth;
+          const barX =
+            actividadColumnWidth + Math.max(0, startOffset) * dayWidth;
+          const barWidth = Math.max(dayWidth * 0.6, duration * dayWidth);
+
+          const isDelayed = taskEnd < today && task.progress < 100;
+
+          let taskColor = task.color || "#667eea";
+          if (task.progress === 100) {
+            taskColor = "#10b981";
+          } else if (isDelayed) {
+            taskColor = "#ef4444";
+          } else if (task.priority === "Alta") {
+            taskColor = "#f59e0b";
+          } else if (task.priority === "Media") {
+            taskColor = "#3b82f6";
+          } else {
+            taskColor = "#22c55e";
+          }
+
+          // Barra de fondo
           const bgBar = document.createElementNS(
             "http://www.w3.org/2000/svg",
             "rect",
@@ -3434,47 +3894,193 @@
           bgBar.setAttribute("height", barHeight);
           bgBar.setAttribute(
             "fill",
-            task.progress === 100 ? "#e5e7eb" : customSettings.borderColor,
+            task.progress === 100
+              ? "#e2e8f0"
+              : isDelayed
+                ? "#fee2e2"
+                : "#e2e8f0",
           );
-          bgBar.setAttribute("rx", "4");
-          svg.appendChild(bgBar);
+          bgBar.setAttribute("rx", "6");
+          bgBar.setAttribute("ry", "6");
+          mainGroup.appendChild(bgBar);
+
+          // Barra de progreso
           const progressBar = document.createElementNS(
             "http://www.w3.org/2000/svg",
             "rect",
           );
           progressBar.setAttribute("x", barX);
           progressBar.setAttribute("y", y);
-          progressBar.setAttribute("width", barWidth * (task.progress / 100));
-          progressBar.setAttribute("height", barHeight);
           progressBar.setAttribute(
-            "fill",
-            task.progress === 100 ? "#9ca3af" : task.color || "#667eea",
+            "width",
+            Math.max(barWidth * (task.progress / 100), 4),
           );
-          progressBar.setAttribute("rx", "4");
+          progressBar.setAttribute("height", barHeight);
+          progressBar.setAttribute("fill", taskColor);
+          progressBar.setAttribute("rx", "6");
+          progressBar.setAttribute("ry", "6");
+          progressBar.classList.add("gantt-bar");
           progressBar.style.cursor = "pointer";
-          progressBar.onclick = () => {
-            const etapa = project.etapas.find((e) =>
-              e.tasks?.some((t) => t.id === task.id),
-            );
-            if (etapa) openTaskModal(task.id, etapa.id);
+
+          progressBar.onclick = (function (taskId) {
+            return function (e) {
+              e.stopPropagation();
+              const etapa = project.etapas.find((e) =>
+                e.tasks?.some((t) => t.id === taskId),
+              );
+              if (etapa) openTaskModal(taskId, etapa.id);
+            };
+          })(task.id);
+
+          mainGroup.appendChild(progressBar);
+
+          // ==================== ETAPA Y RESPONSABLE DENTRO DE LA BARRA ====================
+          const etapaName = task.etapaName;
+          const responsable = task.responsable || "";
+
+          // Determinar espacio disponible dentro de la barra
+          const availableWidth = barWidth - 50; // Restar espacio para el porcentaje
+
+          // Función para truncar texto si es muy largo
+          const truncateText = (text, maxChars) => {
+            if (text.length <= maxChars) return text;
+            return text.substring(0, maxChars - 3) + "...";
           };
-          svg.appendChild(progressBar);
-          if (barWidth > 40) {
-            const pText = document.createElementNS(
+
+          const maxCharsInBar = Math.max(10, Math.floor(availableWidth / 8));
+
+          // Texto de etapa (primera línea dentro de la barra)
+          let displayEtapaName = etapaName;
+          if (displayEtapaName.length > maxCharsInBar && maxCharsInBar > 8) {
+            displayEtapaName = truncateText(displayEtapaName, maxCharsInBar);
+          }
+
+          const etapaText = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "text",
+          );
+          let textYPos = y + barHeight / 2 - 4;
+
+          // Si hay responsable, ajustar posición para dos líneas
+          if (responsable) {
+            textYPos = y + barHeight / 2 - 6;
+          }
+
+          etapaText.setAttribute("x", barX + 6);
+          etapaText.setAttribute("y", textYPos);
+          etapaText.setAttribute(
+            "font-size",
+            Math.max(8, customSettings.fontSize - 6) + "px",
+          );
+          etapaText.setAttribute("fill", "#1e293b");
+          etapaText.setAttribute("font-weight", "600");
+          etapaText.setAttribute("opacity", "0.95");
+          etapaText.textContent = `📁 ${displayEtapaName}`;
+          mainGroup.appendChild(etapaText);
+
+          // Texto de responsable (segunda línea dentro de la barra)
+          if (responsable) {
+            let displayResponsable = responsable;
+            if (
+              displayResponsable.length > maxCharsInBar - 3 &&
+              maxCharsInBar > 10
+            ) {
+              displayResponsable = truncateText(
+                displayResponsable,
+                maxCharsInBar - 3,
+              );
+            }
+
+            const respText = document.createElementNS(
               "http://www.w3.org/2000/svg",
               "text",
             );
-            pText.setAttribute("x", barX + 5);
-            pText.setAttribute("y", y + barHeight / 2 + 4);
-            pText.setAttribute("font-size", customSettings.fontSize - 2 + "px");
-            pText.setAttribute("fill", "#fff");
-            pText.textContent = `${task.progress}%`;
-            svg.appendChild(pText);
+            respText.setAttribute("x", barX + 6);
+            respText.setAttribute("y", y + barHeight / 2 + 8);
+            respText.setAttribute(
+              "font-size",
+              Math.max(7, customSettings.fontSize - 8) + "px",
+            );
+            respText.setAttribute("fill", "#475569");
+            respText.setAttribute("font-weight", "normal");
+            respText.setAttribute("opacity", "0.85");
+            respText.textContent = `👤 ${displayResponsable}`;
+            mainGroup.appendChild(respText);
           }
-          y += barHeight + 10;
+
+          // Porcentaje (lado derecho de la barra)
+          const pText = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "text",
+          );
+          let percentageX = barX + barWidth - 32;
+          let percentageY = y + barHeight / 2 + 4;
+
+          // Ajustar posición si la barra es muy angosta
+          if (barWidth < 60) {
+            percentageX = barX + barWidth - 28;
+          }
+
+          pText.setAttribute("x", percentageX);
+          pText.setAttribute("y", percentageY);
+          pText.setAttribute(
+            "font-size",
+            Math.max(9, customSettings.fontSize - 3) + "px",
+          );
+          pText.setAttribute("fill", "#1e293b");
+          pText.setAttribute("font-weight", "bold");
+          pText.textContent = `${task.progress}%`;
+          mainGroup.appendChild(pText);
+
+          // Tooltip completo
+          const tooltipText = `${taskName}\n📁 Etapa: ${etapaName}\n👤 Responsable: ${responsable || "No asignado"}\n📅 ${task.start} → ${task.end}\n📊 Progreso: ${task.progress}%\n🎯 Prioridad: ${task.priority || "Media"}`;
+          const title = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "title",
+          );
+          title.textContent = tooltipText;
+          progressBar.appendChild(title);
+
+          // Icono de alerta si está atrasada
+          if (isDelayed) {
+            const delayIcon = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "text",
+            );
+            delayIcon.setAttribute("x", barX + barWidth - 22);
+            delayIcon.setAttribute("y", y + barHeight - 8);
+            delayIcon.setAttribute("font-size", "11px");
+            delayIcon.setAttribute("fill", "#ef4444");
+            delayIcon.textContent = "⚠️";
+            mainGroup.appendChild(delayIcon);
+          }
+
+          y += rowHeight;
         });
+
+        const finalLine = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "line",
+        );
+        finalLine.setAttribute("x1", 0);
+        finalLine.setAttribute("y1", y + 5);
+        finalLine.setAttribute("x2", totalWidth);
+        finalLine.setAttribute("y2", y + 5);
+        finalLine.setAttribute("stroke", customSettings.borderColor);
+        finalLine.setAttribute("stroke-width", "1");
+        mainGroup.appendChild(finalLine);
+
+        svg.appendChild(mainGroup);
         container.innerHTML = "";
         container.appendChild(svg);
+
+        const scaleValueEl = document.getElementById("scaleValue");
+        const scaleControlEl = document.getElementById("ganttScaleControl");
+        if (scaleValueEl)
+          scaleValueEl.textContent = `${Math.round(currentScale * 100)}%`;
+        if (scaleControlEl) scaleControlEl.value = currentScale;
+
+        localStorage.setItem("gantt_view_mode", currentViewMode);
       }
 
       // ==================== BUSQUEDA GLOBAL ====================
@@ -3829,6 +4435,52 @@
         document.getElementById("searchFilter").value = "all";
         document.getElementById("searchResultsCount").innerHTML = "";
         renderAll();
+      }
+
+      // ==================== Gant sacle ======================
+      // Funciones de control de escala y vistas
+      function changeGanttScale(scale) {
+        scale = Math.min(2, Math.max(0.3, parseFloat(scale)));
+        localStorage.setItem("gantt_scale", scale);
+        renderGanttChart();
+        showToast(`Escala: ${Math.round(scale * 100)}%`, "success");
+      }
+
+      function zoomIn() {
+        let currentScale = parseFloat(
+          localStorage.getItem("gantt_scale") || "1",
+        );
+        currentScale = Math.min(2, currentScale + 0.1);
+        changeGanttScale(currentScale);
+      }
+
+      function zoomOut() {
+        let currentScale = parseFloat(
+          localStorage.getItem("gantt_scale") || "1",
+        );
+        currentScale = Math.max(0.3, currentScale - 0.1);
+        changeGanttScale(currentScale);
+      }
+
+      function viewFromProjectStart() {
+        localStorage.setItem("gantt_view_mode", "project_start");
+        rangeSettings.manualMode = false;
+        renderGanttChart();
+        showToast("Vista: desde inicio del proyecto", "success");
+      }
+
+      function centerOnToday() {
+        localStorage.setItem("gantt_view_mode", "today_centered");
+        rangeSettings.manualMode = false;
+        renderGanttChart();
+        showToast("Vista: centrada en fecha actual", "success");
+      }
+
+      function zoomToFitAll() {
+        localStorage.setItem("gantt_view_mode", "fit_all");
+        rangeSettings.manualMode = false;
+        renderGanttChart();
+        showToast("Vista: todo el proyecto", "success");
       }
 
       // ==================== EXPORTAR PDF ====================
@@ -4687,6 +5339,33 @@
             question.classList.toggle("open");
           };
         });
+
+        // Controles del Gantt
+        const scaleControl = document.getElementById("ganttScaleControl");
+        if (scaleControl) {
+          scaleControl.oninput = (e) => {
+            const scale = e.target.value;
+            document.getElementById("scaleValue").textContent =
+              `${Math.round(scale * 100)}%`;
+          };
+          scaleControl.onchange = (e) => {
+            changeGanttScale(e.target.value);
+          };
+        }
+
+        document.getElementById("zoomInBtn")?.addEventListener("click", zoomIn);
+        document
+          .getElementById("zoomOutBtn")
+          ?.addEventListener("click", zoomOut);
+        document
+          .getElementById("viewFromStartBtn")
+          ?.addEventListener("click", viewFromProjectStart);
+        document
+          .getElementById("centerTodayBtn")
+          ?.addEventListener("click", centerOnToday);
+        document
+          .getElementById("zoomToFitBtn")
+          ?.addEventListener("click", zoomToFitAll);
       }
 
       init();
